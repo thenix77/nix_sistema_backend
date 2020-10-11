@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const colors_1 = __importDefault(require("colors"));
 //Rutas
-const sinfo_route_1 = __importDefault(require("./routes/sinfo.route"));
+const blackboardLC_route_1 = __importDefault(require("./routes/blackboardLC.route"));
+const blackboardEnrolamiento_route_1 = __importDefault(require("./routes/blackboardEnrolamiento.route"));
 class Server {
     constructor(port) {
         this.port = port;
@@ -24,16 +25,17 @@ class Server {
         this.rutas();
     }
     config() {
-        this.app.set('port', this.port || process.env.PORT || 4000);
+        this.app.set("port", this.port || process.env.PORT || 4000);
     }
     rutas() {
-        this.app.use('/', sinfo_route_1.default);
+        this.app.use("/BB/ListasCruzadas", blackboardLC_route_1.default);
+        this.app.use("/BB/Enrolamiento", blackboardEnrolamiento_route_1.default);
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.app.listen(this.app.get('port'));
-            console.log(`${colors_1.default.yellow('server> ')} ESTADO DEL SERVIDOR ${colors_1.default.red('UP')}`);
-            console.log(`${colors_1.default.yellow('server> ')} PUERTO ${colors_1.default.red(this.app.get('port'))}`);
+            yield this.app.listen(this.app.get("port"));
+            console.log(`${colors_1.default.yellow("server> ")} ESTADO DEL SERVIDOR ${colors_1.default.red("UP")}`);
+            console.log(`${colors_1.default.yellow("server> ")} PUERTO ${colors_1.default.red(this.app.get("port"))}`);
         });
     }
 }

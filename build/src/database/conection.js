@@ -16,10 +16,10 @@ function dbSinfo() {
 exports.dbSinfo = dbSinfo;
 function dbBlackBoard() {
     return new pg_1.Pool({
-        host: process.env.DB_HOST || "localhost",
-        user: "postgres",
-        password: "1234nix",
-        database: "db_sensors",
+        host: process.env.DB_HOST || "senati-dda.blackboard.com",
+        user: process.env.DB_USER || "senatiddauser",
+        password: process.env.DB_PSWD || "mPdMSXiwztc9d6o",
+        database: process.env.DB_DDBB || "BB5eed7aa3f3eed",
         max: 10,
         min: 0,
         idleTimeoutMillis: 10000,

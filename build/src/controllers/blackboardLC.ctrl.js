@@ -12,32 +12,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const sinfo_data_1 = __importDefault(require("../data/sinfo.data"));
+const blackboardLC_data_1 = __importDefault(require("../data/blackboardLC.data"));
 class Ctrl {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const lcnrc = yield sinfo_data_1.default.index();
+            const lcnrc = yield blackboardLC_data_1.default.index();
             return res.status(200).json(lcnrc);
         });
     }
     find(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const FIND = req.params.FIND;
-            const rst = yield sinfo_data_1.default.find(FIND);
+            const rst = yield blackboardLC_data_1.default.find(FIND);
             return res.status(200).json({ rst });
         });
     }
     findLC(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const LC = req.params.LC;
-            const rst = yield sinfo_data_1.default.findLC(LC);
+            const rst = yield blackboardLC_data_1.default.findLC(LC);
             return res.status(200).json({ rst });
         });
     }
     findNRC(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const NRC = req.params.NRC;
-            const rst = yield sinfo_data_1.default.findNRC(NRC);
+            const rst = yield blackboardLC_data_1.default.findNRC(NRC);
             return res.status(200).json({ rst });
         });
     }

@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const sinfo_ctrl_1 = __importDefault(require("../controllers/sinfo.ctrl"));
+const blackboardLC_ctrl_1 = __importDefault(require("../controllers/blackboardLC.ctrl"));
 class Rutas {
     constructor() {
         this.router = express_1.Router();
@@ -12,10 +12,10 @@ class Rutas {
         this.post();
     }
     get() {
-        this.router.get("/", sinfo_ctrl_1.default.index);
-        this.router.get("/FIND/:FIND", sinfo_ctrl_1.default.find);
-        this.router.get("/LC/:LC", sinfo_ctrl_1.default.findLC);
-        this.router.get("/NRC/:NRC", sinfo_ctrl_1.default.findNRC);
+        this.router.get("/", blackboardLC_ctrl_1.default.index);
+        this.router.get("/find/:FIND", blackboardLC_ctrl_1.default.find);
+        this.router.get("/lc/:LC", blackboardLC_ctrl_1.default.findLC);
+        this.router.get("/nrc/:NRC", blackboardLC_ctrl_1.default.findNRC);
     }
     post() { }
 }
