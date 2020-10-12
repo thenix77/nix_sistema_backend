@@ -4,7 +4,7 @@ import color from "colors";
 //Rutas
 import blackboardLCRoute from "./routes/blackboardLC.route";
 import blackboardEnrolamientoRoute from "./routes/blackboardEnrolamiento.route";
-
+import blackboardCursosRoute from "./routes/blackboardCursos.route";
 class Server {
   app: express.Application;
 
@@ -21,6 +21,7 @@ class Server {
   private rutas() {
     this.app.use("/BB/ListasCruzadas", blackboardLCRoute);
     this.app.use("/BB/Enrolamiento", blackboardEnrolamientoRoute);
+    this.app.use("/BB/Cursos", blackboardCursosRoute);
   }
 
   async start() {

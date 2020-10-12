@@ -17,6 +17,7 @@ const colors_1 = __importDefault(require("colors"));
 //Rutas
 const blackboardLC_route_1 = __importDefault(require("./routes/blackboardLC.route"));
 const blackboardEnrolamiento_route_1 = __importDefault(require("./routes/blackboardEnrolamiento.route"));
+const blackboardCursos_route_1 = __importDefault(require("./routes/blackboardCursos.route"));
 class Server {
     constructor(port) {
         this.port = port;
@@ -30,6 +31,7 @@ class Server {
     rutas() {
         this.app.use("/BB/ListasCruzadas", blackboardLC_route_1.default);
         this.app.use("/BB/Enrolamiento", blackboardEnrolamiento_route_1.default);
+        this.app.use("/BB/Cursos", blackboardCursos_route_1.default);
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {

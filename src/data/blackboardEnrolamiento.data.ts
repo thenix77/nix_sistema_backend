@@ -1,5 +1,6 @@
 import { dbSinfo, dbBlackBoard } from "../database/conection";
-import { IEnrolamiento, ITerm } from "../models/enrolamiento.model";
+import { IEnrolamiento } from "../models/enrolamiento.model";
+import { ITerm } from "../models/Term.model";
 
 class Data {
   private dbSinfo = dbSinfo();
