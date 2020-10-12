@@ -1,5 +1,6 @@
-export interface IPayload{
-    id:number
-    iat: number
-    exp: number
+export interface IPayload {
+  id: number;
+  date: number;
+  iat: number;
+  exp: number;
 }

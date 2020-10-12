@@ -7,7 +7,7 @@ function dbSinfo() {
         host: process.env.DB_HOST || "localhost",
         user: "postgres",
         password: "1234nix",
-        database: "db_sensors",
+        database: process.env.DB_DDBB || "blackboard",
         max: 10,
         min: 0,
         idleTimeoutMillis: 10000,

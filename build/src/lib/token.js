@@ -12,25 +12,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validationToken = exports.token = void 0;
+exports.validationToken = exports.expireIn = exports.token = void 0;
 const jwt_then_1 = __importDefault(require("jwt-then"));
-const apiToken = 'La$$ZDXe|f8F7Uf[F2J4Se]2</{916eds+d>*M=8)fOcc)NTF3jlJADcjow.dQ?';
+const apiToken = "La$$ZDXe|f8F7Uf[F2J4Se]2</{916eds+d>*M=8)fOcc)NTF3jlJADcjow.dQ?";
 function token(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        let tokens = '';
+        let tokens = "";
         if (id > 0) {
-            tokens = yield jwt_then_1.default.sign({ id: id }, apiToken);
-        }
+            tokens = yield jwt_then_1.default.sign({ id: id, date: Date.now() }, apiToken, {
+                expiresIn: 1 * 60 * 60,
+            });
+        } // { expiresIn: 24 * 60 * 60 }
         return tokens;
     });
 }
 exports.token = token;
+function expireIn(token) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const payload = (yield jwt_then_1.default.verify(token, apiToken || "testToken"));
+        const fHoy = Date.now();
+        const fCreacion = payload.date;
+        const expireIn = payload.exp - (fHoy - fCreacion);
+        return { fHoy, fCreacion, expireIn, token: payload.exp };
+    });
+}
+exports.expireIn = expireIn;
 exports.validationToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const tokenx = req.header('token');
+    const tokenx = req.header("token");
     if (!tokenx)
-        return res.status(200).json({ auth: false, msg: 'no autorizado' });
+        return res.status(200).json({ auth: false, msg: "no autorizado" });
     try {
-        const payload = yield jwt_then_1.default.verify(tokenx, apiToken || "testToken");
+        const payload = (yield jwt_then_1.default.verify(tokenx, apiToken || "testToken"));
         req.userId = payload.id;
     }
     catch (error) {

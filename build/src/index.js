@@ -15,9 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const colors_1 = __importDefault(require("colors"));
 //Rutas
+const token_route_1 = __importDefault(require("./routes/token.route"));
 const blackboardLC_route_1 = __importDefault(require("./routes/blackboardLC.route"));
 const blackboardEnrolamiento_route_1 = __importDefault(require("./routes/blackboardEnrolamiento.route"));
 const blackboardCursos_route_1 = __importDefault(require("./routes/blackboardCursos.route"));
+const blackboardTerm_route_1 = __importDefault(require("./routes/blackboardTerm.route"));
+const sinfoTutoria_route_1 = __importDefault(require("./routes/sinfoTutoria.route"));
+const sinfoVMatricula_route_1 = __importDefault(require("./routes/sinfoVMatricula.route"));
 class Server {
     constructor(port) {
         this.port = port;
@@ -29,9 +33,13 @@ class Server {
         this.app.set("port", this.port || process.env.PORT || 4000);
     }
     rutas() {
+        this.app.use("/auth/token", token_route_1.default);
         this.app.use("/BB/ListasCruzadas", blackboardLC_route_1.default);
         this.app.use("/BB/Enrolamiento", blackboardEnrolamiento_route_1.default);
         this.app.use("/BB/Cursos", blackboardCursos_route_1.default);
+        this.app.use("/BB/Term", blackboardTerm_route_1.default);
+        this.app.use("/sinfo/tutoria", sinfoTutoria_route_1.default);
+        this.app.use("/sinfo/matricula", sinfoVMatricula_route_1.default);
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {
