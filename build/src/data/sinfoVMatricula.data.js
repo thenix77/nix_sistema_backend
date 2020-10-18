@@ -26,7 +26,7 @@ class Data {
     index() {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.Consulta();
-            return this.matriculas.length;
+            return this.matriculas;
         });
     }
     idalumno(IDALUMNO) {
@@ -41,6 +41,20 @@ class Data {
             yield this.Consulta();
             const rst = this.matriculas.filter((data) => data.id_curso.includes(IDCURSO));
             return rst;
+        });
+    }
+    cantidadCursos() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ssql = 'select distinct cursoid from vmatriculabb';
+            const { rows } = yield this.dbSinfo.query(ssql);
+            return rows.length;
+        });
+    }
+    cantidadAlumnos() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ssql = 'select distinct id_alumno from vmatriculabb';
+            const { rows } = yield this.dbSinfo.query(ssql);
+            return rows.length;
         });
     }
 }

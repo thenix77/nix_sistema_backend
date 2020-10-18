@@ -43,6 +43,18 @@ class Ctrl {
             return res.status(200).json({ length: cursos.length, cursos });
         });
     }
+    cantidadCursos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const length = yield blackboardCurso_data_1.default.cantidadCursos();
+            return res.status(200).json({ length });
+        });
+    }
+    cantidadAlumnos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const length = yield blackboardCurso_data_1.default.cantidadAlumnos();
+            return res.status(200).json({ length });
+        });
+    }
 }
 const ctrl = new Ctrl();
 exports.default = ctrl;

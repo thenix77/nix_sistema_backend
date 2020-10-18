@@ -17,7 +17,7 @@ class Ctrl {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const rst = yield sinfoVMatricula_data_1.default.index();
-            return res.status(200).json({ length: rst });
+            return res.status(200).json({ length: rst.length, data: rst });
         });
     }
     idalumno(req, res) {
@@ -32,6 +32,18 @@ class Ctrl {
             const IDCURSO = req.params.idcurso;
             const rst = yield sinfoVMatricula_data_1.default.idcurso(IDCURSO);
             return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
+    cantidadCursos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rst = yield sinfoVMatricula_data_1.default.cantidadCursos();
+            return res.status(200).json({ length: rst });
+        });
+    }
+    cantidadAlumnos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rst = yield sinfoVMatricula_data_1.default.cantidadAlumnos();
+            return res.status(200).json({ length: rst });
         });
     }
 }

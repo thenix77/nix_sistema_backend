@@ -16,6 +16,8 @@ class Rutas {
         this.router.get("/", sinfoVMatricula_ctrl_1.default.index);
         this.router.get("/idalumno/:idalumno", token_1.validationToken, sinfoVMatricula_ctrl_1.default.idalumno);
         this.router.get("/idcurso/:idcurso", token_1.validationToken, sinfoVMatricula_ctrl_1.default.idcurso);
+        this.router.get('/cantidadCursos', sinfoVMatricula_ctrl_1.default.cantidadCursos);
+        this.router.get('/cantidadAlumnos', sinfoVMatricula_ctrl_1.default.cantidadAlumnos);
     }
     post() { }
 }

@@ -13,16 +13,16 @@ class Data {
     this.matriculas = rows;
   }
 
-  async index(): Promise<number> {
+  async index(): Promise<IVMatricula[]> {
     await this.Consulta();
 
-    return this.matriculas.length;
+    return this.matriculas;
   }
 
   async idalumno(IDALUMNO: string) {
     await this.Consulta();
 
-    const rst = this.matriculas.filter((data) =>
+   const rst = this.matriculas.filter((data) =>
       data.id_alumno.includes(IDALUMNO)
     );
     return rst;
@@ -36,6 +36,24 @@ class Data {
     );
     return rst;
   }
+
+  async cantidadCursos() {
+      const ssql = 'select distinct cursoid from vmatriculabb'
+      const { rows } = await this.dbSinfo.query(ssql);
+    
+    
+    return rows.length;
+  }
+
+  async cantidadAlumnos() {
+      const ssql = 'select distinct id_alumno from vmatriculabb'
+      const { rows } = await this.dbSinfo.query(ssql);
+    
+    
+    return rows.length;
+  }
+
+
 }
 
 const data = new Data();

@@ -14,6 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const colors_1 = __importDefault(require("colors"));
+//
+const cors_1 = __importDefault(require("cors"));
+const helmet_1 = __importDefault(require("helmet"));
+const compression_1 = __importDefault(require("compression"));
 //Rutas
 const token_route_1 = __importDefault(require("./routes/token.route"));
 const blackboardLC_route_1 = __importDefault(require("./routes/blackboardLC.route"));
@@ -27,10 +31,22 @@ class Server {
         this.port = port;
         this.app = express_1.default();
         this.config();
+        this.middleware();
         this.rutas();
     }
     config() {
         this.app.set("port", this.port || process.env.PORT || 4000);
+    }
+    middleware() {
+        this.app.use(express_1.default.json());
+        this.app.use(helmet_1.default());
+        this.app.use(compression_1.default());
+        this.app.use(cors_1.default({
+            origin: "*",
+            methods: "GET,PUT,POST",
+            allowedHeaders: "X-Requested-With,content-type,token",
+            credentials: true,
+        }));
     }
     rutas() {
         this.app.use("/auth/token", token_route_1.default);

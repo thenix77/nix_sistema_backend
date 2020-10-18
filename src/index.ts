@@ -1,6 +1,12 @@
 import express from "express";
 import color from "colors";
 
+//
+import cors from "cors";
+import helmet from 'helmet'
+import compression from 'compression'
+
+
 //Rutas
 import tokenRoute from "./routes/token.route";
 
@@ -18,11 +24,26 @@ class Server {
   constructor(private port?: number | string) {
     this.app = express();
     this.config();
+    this.middleware();
     this.rutas();
   }
 
   private config() {
     this.app.set("port", this.port || process.env.PORT || 4000);
+  }
+
+  private middleware() {
+    this.app.use(express.json());
+    this.app.use(helmet())
+    this.app.use(compression())
+    this.app.use(
+      cors({
+        origin: "*",
+        methods: "GET,PUT,POST",
+        allowedHeaders: "X-Requested-With,content-type,token",
+        credentials: true,
+      })
+    );
   }
 
   private rutas() {
@@ -32,6 +53,7 @@ class Server {
     this.app.use("/BB/Enrolamiento", blackboardEnrolamientoRoute);
     this.app.use("/BB/Cursos", blackboardCursosRoute);
     this.app.use("/BB/Term", blackboardTermRoute);
+    
 
     this.app.use("/sinfo/tutoria", sinfoTutoriaRoute);
     this.app.use("/sinfo/matricula", sinfoVMatriculaRoute);

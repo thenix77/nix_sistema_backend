@@ -64,6 +64,47 @@ class Data {
 
     return rst;
   }
+
+
+  async cantidadCursos(): Promise<number> {
+      const ssql =
+        "select distinct course_id "+
+        "from( "+
+        "SELECT  u.batch_uid,u.user_id, u.firstname, u.lastname, u.student_id, u.email, cm.course_id, tr.sourcedid_id, cc.Role, u.row_status "+ 
+        "from course_users cc "+
+        "inner join Users U on cc.users_pk1 = U.pk1 "+
+        "inner join Course_main cm on cc.crsmain_pk1 = cm.pk1 "+
+        "inner join course_term ct on ct.crsmain_pk1 = cm.pk1 "+
+        "inner join term tr on tr.pk1=ct.term_pk1 "+
+        "where COURSE_ID NOT LIKE 'PATRON-%' AND COURSE_ID NOT LIKE '%INDUCCI%' AND u.batch_uid NOT LIKE '%_previewuser%' "+
+        "AND COURSE_ID NOT LIKE '%-LC_%'  "+
+        "order by cc.users_pk1) as bb "+
+        "where sourcedid_id like '202020' and  course_id like '202020%' "
+
+      const { rows } = await this.dbBlackBoard.query(ssql);
+
+      return rows.length
+  }
+
+  async cantidadAlumnos(): Promise<number> {
+      const ssql =
+        "select distinct student_id "+
+        "from( "+
+        "SELECT  u.batch_uid,u.user_id, u.firstname, u.lastname, u.student_id, u.email, cm.course_id, tr.sourcedid_id, cc.Role, u.row_status "+ 
+        "from course_users cc "+
+        "inner join Users U on cc.users_pk1 = U.pk1 "+
+        "inner join Course_main cm on cc.crsmain_pk1 = cm.pk1 "+
+        "inner join course_term ct on ct.crsmain_pk1 = cm.pk1 "+
+        "inner join term tr on tr.pk1=ct.term_pk1 "+
+        "where COURSE_ID NOT LIKE 'PATRON-%' AND COURSE_ID NOT LIKE '%INDUCCI%' AND u.batch_uid NOT LIKE '%_previewuser%' "+
+        "AND COURSE_ID NOT LIKE '%-LC_%'  "+
+        "order by cc.users_pk1) as bb "+
+        "where sourcedid_id like '202020' and  course_id like '202020%' "
+
+      const { rows } = await this.dbBlackBoard.query(ssql);
+
+      return rows.length
+  }
 }
 
 const data = new Data();

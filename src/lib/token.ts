@@ -10,7 +10,7 @@ export async function token(id: number): Promise<string> {
 
   if (id > 0) {
     tokens = await jwt.sign({ id: id, date: Date.now() }, apiToken, {
-      expiresIn: 1 * 60 * 60,
+      expiresIn: Math.floor(Date.now() / 1000) + 60, // (24*60*60 -> 1d  )expira en una hora
     });
   } // { expiresIn: 24 * 60 * 60 }
 
@@ -23,11 +23,10 @@ export async function expireIn(token: string) {
     apiToken || "testToken"
   )) as IPayload;
 
-  const fHoy: number = Date.now();
-  const fCreacion: number = payload.date;
-  const expireIn: number = payload.exp - (fHoy - fCreacion);
+  const fHoy: number = Date.now() / 1000;
+  const expireIn: number = payload.exp - fHoy;
 
-  return { fHoy, fCreacion, expireIn, token: payload.exp };
+  return { fHoy, expireIn, token: payload.exp };
 }
 
 export const validationToken = async (

@@ -20,7 +20,7 @@ function token(id) {
         let tokens = "";
         if (id > 0) {
             tokens = yield jwt_then_1.default.sign({ id: id, date: Date.now() }, apiToken, {
-                expiresIn: 1 * 60 * 60,
+                expiresIn: Math.floor(Date.now() / 1000) + 60,
             });
         } // { expiresIn: 24 * 60 * 60 }
         return tokens;
@@ -30,10 +30,9 @@ exports.token = token;
 function expireIn(token) {
     return __awaiter(this, void 0, void 0, function* () {
         const payload = (yield jwt_then_1.default.verify(token, apiToken || "testToken"));
-        const fHoy = Date.now();
-        const fCreacion = payload.date;
-        const expireIn = payload.exp - (fHoy - fCreacion);
-        return { fHoy, fCreacion, expireIn, token: payload.exp };
+        const fHoy = Date.now() / 1000;
+        const expireIn = payload.exp - fHoy;
+        return { fHoy, expireIn, token: payload.exp };
     });
 }
 exports.expireIn = expireIn;

@@ -16,6 +16,8 @@ class Rutas {
         this.router.get("/periodo/:periodo", blackboardCursos_ctrl_1.default.cursosPeriodo);
         this.router.get("/periodo/:periodo/:curso", blackboardCursos_ctrl_1.default.cursosPeriodoCurso);
         this.router.get("/find/:curso", blackboardCursos_ctrl_1.default.cursosFind);
+        this.router.get('/cantidadCursos', blackboardCursos_ctrl_1.default.cantidadCursos);
+        this.router.get('/CantidadAlumnos', blackboardCursos_ctrl_1.default.cantidadAlumnos);
     }
     post() { }
 }

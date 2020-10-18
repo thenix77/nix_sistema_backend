@@ -15,6 +15,8 @@ class Rutas {
     this.router.get("/", ctrl.index);
     this.router.get("/idalumno/:idalumno", validationToken, ctrl.idalumno);
     this.router.get("/idcurso/:idcurso", validationToken, ctrl.idcurso);
+    this.router.get('/cantidadCursos', ctrl.cantidadCursos)
+    this.router.get('/cantidadAlumnos', ctrl.cantidadAlumnos )
   }
 
   post() {}
