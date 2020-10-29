@@ -39,7 +39,7 @@ class Data {
     idcurso(IDCURSO) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.Consulta();
-            const rst = this.matriculas.filter((data) => data.id_curso.includes(IDCURSO));
+            const rst = this.matriculas.filter((data) => data.cursoid.includes(IDCURSO));
             return rst;
         });
     }

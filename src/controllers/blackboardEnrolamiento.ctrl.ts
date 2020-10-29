@@ -8,6 +8,14 @@ class Ctrl {
     return res.status(200).json({ PERIODOS });
   }
 
+
+  async enrolamientoCursos(req:Request, res:Response):Promise<Response | void> {
+    const cursos = await data.EnrolamientoCurso()
+
+    return res.status(200).json({ length : cursos.length , data:cursos})
+    
+  }
+
   async enrolamientoPeriodo(
     req: Request,
     res: Response

@@ -4,7 +4,7 @@ import data from "../data/sinfoTutoria.data";
 class Ctrl {
   async index(req: Request, res: Response): Promise<Response | void> {
     const tutoria = await data.index();
-    return res.status(200).json(tutoria);
+    return res.status(200).json({length:tutoria.length,data:tutoria});
   }
 
   async find(req: Request, res: Response): Promise<Response | void> {

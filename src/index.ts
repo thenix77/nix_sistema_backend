@@ -17,6 +17,8 @@ import blackboardTermRoute from "./routes/blackboardTerm.route";
 
 import sinfoTutoriaRoute from "./routes/sinfoTutoria.route";
 import sinfoVMatriculaRoute from "./routes/sinfoVMatricula.route";
+import sinfoVZonalRoute from './routes/sinfoVZonal.route'
+import sinfoVLCruzadaRoute from './routes/sinfoVLCruzada.route'
 
 class Server {
   app: express.Application;
@@ -47,6 +49,7 @@ class Server {
   }
 
   private rutas() {
+
     this.app.use("/auth/token", tokenRoute);
 
     this.app.use("/BB/ListasCruzadas", blackboardLCRoute);
@@ -57,6 +60,8 @@ class Server {
 
     this.app.use("/sinfo/tutoria", sinfoTutoriaRoute);
     this.app.use("/sinfo/matricula", sinfoVMatriculaRoute);
+    this.app.use("/sinfo/zonal", sinfoVZonalRoute);
+    this.app.use('/sinfo/listacruzada', sinfoVLCruzadaRoute)
   }
 
   async start() {

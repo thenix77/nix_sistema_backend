@@ -32,7 +32,7 @@ class Data {
     await this.Consulta();
 
     const rst = this.matriculas.filter((data) =>
-      data.id_curso.includes(IDCURSO)
+      data.cursoid.includes(IDCURSO)
     );
     return rst;
   }

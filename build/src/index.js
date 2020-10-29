@@ -26,6 +26,8 @@ const blackboardCursos_route_1 = __importDefault(require("./routes/blackboardCur
 const blackboardTerm_route_1 = __importDefault(require("./routes/blackboardTerm.route"));
 const sinfoTutoria_route_1 = __importDefault(require("./routes/sinfoTutoria.route"));
 const sinfoVMatricula_route_1 = __importDefault(require("./routes/sinfoVMatricula.route"));
+const sinfoVZonal_route_1 = __importDefault(require("./routes/sinfoVZonal.route"));
+const sinfoVLCruzada_route_1 = __importDefault(require("./routes/sinfoVLCruzada.route"));
 class Server {
     constructor(port) {
         this.port = port;
@@ -56,6 +58,8 @@ class Server {
         this.app.use("/BB/Term", blackboardTerm_route_1.default);
         this.app.use("/sinfo/tutoria", sinfoTutoria_route_1.default);
         this.app.use("/sinfo/matricula", sinfoVMatricula_route_1.default);
+        this.app.use("/sinfo/zonal", sinfoVZonal_route_1.default);
+        this.app.use('/sinfo/listacruzada', sinfoVLCruzada_route_1.default);
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {

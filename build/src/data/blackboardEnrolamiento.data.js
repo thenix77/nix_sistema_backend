@@ -68,6 +68,26 @@ class Data {
             return rst;
         });
     }
+    EnrolamientoCurso() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ssql = `SELECT  u.batch_uid,cm.course_id, tr.sourcedid_id, cc.Role, u.row_status 
+                      from course_users cc
+                      inner join Users U on cc.users_pk1 = U.pk1
+                      inner join Course_main cm on cc.crsmain_pk1 = cm.pk1
+                      inner join course_term ct on ct.crsmain_pk1 = cm.pk1
+                      inner join term tr on tr.pk1=ct.term_pk1
+                      where 
+                        COURSE_ID NOT LIKE 'PATRON-%' AND 
+                        COURSE_ID NOT LIKE 'PARCHE-%' AND 
+                        COURSE_ID NOT LIKE '%INDUCCI%' AND 
+                        COURSE_ID NOT LIKE '%-LC_%' AND 
+                        COURSE_ID LIKE '202020%' AND
+                        u.batch_uid NOT LIKE '%_previewuser%' 
+                      order by cc.users_pk1`;
+            const { rows } = yield this.dbBlackBoard.query(ssql);
+            return rows;
+        });
+    }
 }
 const data = new Data();
 exports.default = data;

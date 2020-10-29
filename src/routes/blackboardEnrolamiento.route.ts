@@ -11,16 +11,11 @@ class Rutas {
   }
 
   get() {
-    this.router.get("/", ctrl.index);
-    this.router.get("/periodo/:periodo", ctrl.enrolamientoPeriodo);
-    this.router.get(
-      "/periodo/:periodo/:cursoid",
-      ctrl.enrolamientoPeriodoCurso
-    );
-    this.router.get(
-      "/periodo/:periodo/:cursoid/:rol",
-      ctrl.enrolamientoPeriodoCursoRol
-    );
+    this.router.get("/", ctrl.index)
+    this.router.get("/periodo/:periodo", ctrl.enrolamientoPeriodo)
+    this.router.get("/periodo/:periodo/:cursoid",ctrl.enrolamientoPeriodoCurso)
+    this.router.get("/periodo/:periodo/:cursoid/:rol", ctrl.enrolamientoPeriodoCursoRol)
+    this.router.get('/cursos' , ctrl.enrolamientoCursos)
   }
 
   post() {}

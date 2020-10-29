@@ -20,6 +20,12 @@ class Ctrl {
             return res.status(200).json({ PERIODOS });
         });
     }
+    enrolamientoCursos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const cursos = yield blackboardEnrolamiento_data_1.default.EnrolamientoCurso();
+            return res.status(200).json({ length: cursos.length, data: cursos });
+        });
+    }
     enrolamientoPeriodo(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var PERIODO = req.params.periodo;

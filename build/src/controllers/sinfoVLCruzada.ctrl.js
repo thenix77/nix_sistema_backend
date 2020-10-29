@@ -12,19 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const sinfoTutoria_data_1 = __importDefault(require("../data/sinfoTutoria.data"));
+const sinfoVLCruzada_data_1 = __importDefault(require("../data/sinfoVLCruzada.data"));
 class Ctrl {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const tutoria = yield sinfoTutoria_data_1.default.index();
-            return res.status(200).json({ length: tutoria.length, data: tutoria });
-        });
-    }
-    find(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const ID_ALUMNO = req.params.id_alumno;
-            const tutoria = yield sinfoTutoria_data_1.default.find(ID_ALUMNO);
-            return res.status(200).json(tutoria);
+            const zonal = yield sinfoVLCruzada_data_1.default.index();
+            return res.status(200).json({ length: zonal.length, data: zonal });
         });
     }
 }

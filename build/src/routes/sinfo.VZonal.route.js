@@ -4,8 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const sinfoTutoria_ctrl_1 = __importDefault(require("../controllers/sinfoTutoria.ctrl"));
-const token_1 = require("../lib/token");
+const sinfoVZonal_ctrl_1 = __importDefault(require("../controllers/sinfoVZonal.ctrl"));
 class Rutas {
     constructor() {
         this.router = express_1.Router();
@@ -13,8 +12,7 @@ class Rutas {
         this.post();
     }
     get() {
-        this.router.get("/", sinfoTutoria_ctrl_1.default.index);
-        this.router.get("/find/:id_alumno", token_1.validationToken, sinfoTutoria_ctrl_1.default.find);
+        this.router.get("/", sinfoVZonal_ctrl_1.default.index);
     }
     post() { }
 }

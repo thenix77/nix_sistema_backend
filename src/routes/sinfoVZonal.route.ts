@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ctrl from "../controllers/sinfoTutoria.ctrl";
+import ctrl from "../controllers/sinfoVZonal.ctrl";
 import { validationToken } from "../lib/token";
 
 class Rutas {
@@ -13,7 +13,6 @@ class Rutas {
 
   get() {
     this.router.get("/",  ctrl.index);
-    this.router.get("/find/:id_alumno", validationToken, ctrl.find);
   }
 
   post() {}
