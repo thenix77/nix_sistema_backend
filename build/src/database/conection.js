@@ -4,12 +4,11 @@ exports.dbBlackBoard = exports.dbSinfo = void 0;
 const pg_1 = require("pg");
 function dbSinfo() {
     return new pg_1.Pool({
-        /*
-        host: process.env.DB_HOST || "localhost",
-        user:  process.env.DB_USER || "postgres",
-        password:  process.env.DB_PSWD || "1234nix",
-        database: process.env.DB_DDBB || "blackboard",*/
-        connectionString: 'postgres://ltwjmfnyompypj:448d691b2faa4230c2dd5cd5d87280e3867909087c1e3ba89c597f86fe9df4f0@ec2-54-157-234-29.compute-1.amazonaws.com:5432/da84omcj3t8lf4',
+        host: process.env.DB_HOST || 'ec2-54-157-234-29.compute-1.amazonaws.com',
+        user: process.env.DB_USER || 'ltwjmfnyompypj',
+        password: process.env.DB_PSWD || '448d691b2faa4230c2dd5cd5d87280e3867909087c1e3ba89c597f86fe9df4f0',
+        database: process.env.DB_DDBB || 'da84omcj3t8lf4',
+        //connectionString:'postgres://ltwjmfnyompypj:448d691b2faa4230c2dd5cd5d87280e3867909087c1e3ba89c597f86fe9df4f0@ec2-54-157-234-29.compute-1.amazonaws.com:5432/da84omcj3t8lf4',
         max: 10,
         min: 0,
         idleTimeoutMillis: 10000,
