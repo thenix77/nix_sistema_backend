@@ -38,7 +38,7 @@ class Server {
         this.rutas();
     }
     config() {
-        this.app.set("port", this.port || process.env.PORT || 4000);
+        this.app.set("port", process.env.PORT || this.port || 4000);
     }
     middleware() {
         this.app.use(express_1.default.json());
