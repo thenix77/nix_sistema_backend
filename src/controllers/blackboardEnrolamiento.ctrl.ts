@@ -3,9 +3,9 @@ import data from "../data/blackboardEnrolamiento.data";
 
 class Ctrl {
   async index(req: Request, res: Response): Promise<Response | void> {
-    const PERIODOS = await data.index();
+    const rst = await data.index();
 
-    return res.status(200).json({ PERIODOS });
+    return res.status(200).json({ length: rst.length , data:rst  });
   }
 
 
@@ -16,14 +16,12 @@ class Ctrl {
     
   }
 
-  async enrolamientoPeriodo(
-    req: Request,
-    res: Response
-  ): Promise<Response | void> {
+  async enrolamientoPeriodo(req: Request,res: Response): Promise<Response | void> {
     var PERIODO = req.params.periodo;
+    
     const rst = await data.EnrolamientoPeriodo(PERIODO);
 
-    return res.status(200).json({ rst });
+    return res.status(200).json({ length:rst.length , data:rst });
   }
 
   async enrolamientoPeriodoCurso(

@@ -9,4 +9,5 @@ export interface IEnrolamiento {
   sourcedid_id: string;
   role: string;
   row_status: string;
+  habilitado:string
 }

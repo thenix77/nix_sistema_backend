@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ctrl from "../controllers/sinfoTutoria.ctrl";
+import ctrl from "../controllers/blackboardTerm.ctrl";
 
 class Rutas {
   router: Router;

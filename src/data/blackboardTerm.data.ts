@@ -8,9 +8,14 @@ class Data {
 
   private async consulta() {
     const ssql =
-      "SELECT name,sourcedid_id,start_date,end_date " +
-      "from  term " +
-      "where available_ind like 'Y'";
+                ` select  sourcedid_id ,name ,  start_date, end_date
+                  from
+                    term
+                  where
+                    name not like 'Patrón%' and
+                    name not like 'PRUEBA%' and
+                    name not like 'Inducción' 
+                  order by sourcedid_id desc `
 
     const { rows } = await this.dbBlackBoard.query(ssql);
 

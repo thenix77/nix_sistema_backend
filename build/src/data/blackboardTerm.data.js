@@ -18,9 +18,14 @@ class Data {
     }
     consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "SELECT name,sourcedid_id,start_date,end_date " +
-                "from  term " +
-                "where available_ind like 'Y'";
+            const ssql = ` select  sourcedid_id ,name ,  start_date, end_date
+                  from
+                    term
+                  where
+                    name not like 'Patrón%' and
+                    name not like 'PRUEBA%' and
+                    name not like 'Inducción' 
+                  order by sourcedid_id desc `;
             const { rows } = yield this.dbBlackBoard.query(ssql);
             this.terms = rows;
         });

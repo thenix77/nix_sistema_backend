@@ -16,8 +16,8 @@ const blackboardEnrolamiento_data_1 = __importDefault(require("../data/blackboar
 class Ctrl {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const PERIODOS = yield blackboardEnrolamiento_data_1.default.index();
-            return res.status(200).json({ PERIODOS });
+            const rst = yield blackboardEnrolamiento_data_1.default.index();
+            return res.status(200).json({ length: rst.length, data: rst });
         });
     }
     enrolamientoCursos(req, res) {
@@ -30,7 +30,7 @@ class Ctrl {
         return __awaiter(this, void 0, void 0, function* () {
             var PERIODO = req.params.periodo;
             const rst = yield blackboardEnrolamiento_data_1.default.EnrolamientoPeriodo(PERIODO);
-            return res.status(200).json({ rst });
+            return res.status(200).json({ length: rst.length, data: rst });
         });
     }
     enrolamientoPeriodoCurso(req, res) {

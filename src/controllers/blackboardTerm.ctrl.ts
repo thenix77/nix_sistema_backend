@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import data from "../data/sinfoTutoria.data";
+import data from "../data/blackboardTerm.data";
 
 class Ctrl {
   async index(req: Request, res: Response): Promise<Response | void> {

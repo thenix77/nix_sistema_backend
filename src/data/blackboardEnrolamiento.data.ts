@@ -9,16 +9,25 @@ class Data {
   private term: ITerm[] = [];
 
   async Enrolamiento() {
-    const ssql =
-      "SELECT  u.batch_uid,u.user_id, u.firstname, u.lastname, u.student_id, u.email, cm.course_id, tr.sourcedid_id, cc.Role, u.row_status " +
-      "from course_users cc " +
-      "inner join Users U on cc.users_pk1 = U.pk1 " +
-      "inner join Course_main cm on cc.crsmain_pk1 = cm.pk1 " +
-      "inner join course_term ct on ct.crsmain_pk1 = cm.pk1 " +
-      "inner join term tr on tr.pk1=ct.term_pk1 " +
-      "where COURSE_ID NOT LIKE 'PATRON-%' AND COURSE_ID NOT LIKE '%INDUCCI%' AND u.batch_uid NOT LIKE '%_previewuser%' " +
-      "AND COURSE_ID NOT LIKE '%-LC_%'  " +
-      "order by cc.users_pk1;";
+     const ssql = `
+                  SELECT  u.batch_uid,u.user_id, u.firstname, u.lastname, u.student_id, u.email, cm.course_id, 
+                          tr.sourcedid_id, cc.Role, u.row_status ,cc.available_ind habilitado 
+                  from course_users cc 
+                  inner join Users U on cc.users_pk1 = U.pk1 
+                  inner join Course_main cm on cc.crsmain_pk1 = cm.pk1 
+                  inner join course_term ct on ct.crsmain_pk1 = cm.pk1 
+                  inner join term tr on tr.pk1=ct.term_pk1 
+                  where 
+                    COURSE_ID NOT LIKE 'PATRON-%' AND 
+                    COURSE_ID NOT LIKE 'PARCHE-%' AND 
+                    COURSE_ID NOT LIKE '%INDUCCI%' AND 
+                    COURSE_ID NOT LIKE '%-LC_%' AND 
+                    COURSE_ID LIKE '%-NRC_%' AND 
+                    U.batch_uid NOT LIKE '%_previewuser%' AND 
+                    CC.ROLE LIKE 'S' or 
+                    cc.role like 'BB_FACILITATOR' or 
+                    cc.role like 'Sup' 
+	                order by cc.users_pk1`;
 
     const { rows } = await this.dbBlackBoard.query(ssql);
 
@@ -27,24 +36,15 @@ class Data {
   }
 
   async index(): Promise<IEnrolamiento[]> {
-    const ssql =
-      "SELECT name,sourcedid_id,start_date,end_date " +
-      "from  term " +
-      "where available_ind like 'Y'";
-
-    const { rows } = await this.dbBlackBoard.query(ssql);
-
-    return (this.term = rows);
+   
+    return  await this.Enrolamiento()
   }
 
   async EnrolamientoPeriodo(PERIODO: string) {
-    await this.Enrolamiento();
+   
+    let rst = await this.Enrolamiento()
 
-    const rst: IEnrolamiento[] = this.enrolamiento.filter(
-      (dato) => dato.sourcedid_id === PERIODO
-    );
-
-    return rst.slice(0, 10);
+    return rst.filter(rs => rs.sourcedid_id === PERIODO)
   }
 
   async EnrolamientoPeriodoCurso(PERIODO: string, CURSOID: string) {
