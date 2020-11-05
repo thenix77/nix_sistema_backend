@@ -8,6 +8,8 @@ import compression from 'compression'
 
 
 //Rutas
+import defaultRoute from './routes/default.route'
+
 import tokenRoute from "./routes/token.route";
 
 import blackboardLCRoute from "./routes/blackboardLC.route";
@@ -49,6 +51,8 @@ class Server {
   }
 
   private rutas() {
+
+    this.app.use('/', defaultRoute)
 
     this.app.use("/auth/token", tokenRoute);
 

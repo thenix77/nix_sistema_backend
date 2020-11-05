@@ -19,6 +19,7 @@ const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const compression_1 = __importDefault(require("compression"));
 //Rutas
+const default_route_1 = __importDefault(require("./routes/default.route"));
 const token_route_1 = __importDefault(require("./routes/token.route"));
 const blackboardLC_route_1 = __importDefault(require("./routes/blackboardLC.route"));
 const blackboardEnrolamiento_route_1 = __importDefault(require("./routes/blackboardEnrolamiento.route"));
@@ -51,6 +52,7 @@ class Server {
         }));
     }
     rutas() {
+        this.app.use('/', default_route_1.default);
         this.app.use("/auth/token", token_route_1.default);
         this.app.use("/BB/ListasCruzadas", blackboardLC_route_1.default);
         this.app.use("/BB/Enrolamiento", blackboardEnrolamiento_route_1.default);
