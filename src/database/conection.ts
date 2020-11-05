@@ -2,10 +2,12 @@ import { Pool } from "pg";
 
 export function dbSinfo() {
   return new Pool({
+    /*
     host: process.env.DB_HOST || "localhost",
     user:  process.env.DB_USER || "postgres",
     password:  process.env.DB_PSWD || "1234nix",
-    database: process.env.DB_DDBB || "blackboard",
+    database: process.env.DB_DDBB || "blackboard",*/
+    connectionString:'postgres://ltwjmfnyompypj:448d691b2faa4230c2dd5cd5d87280e3867909087c1e3ba89c597f86fe9df4f0@ec2-54-157-234-29.compute-1.amazonaws.com:5432/da84omcj3t8lf4',
     max: 10,
     min: 0,
     idleTimeoutMillis: 10000,
