@@ -3,8 +3,8 @@ import { Pool } from "pg";
 export function dbSinfo() {
   return new Pool({
     host: process.env.DB_HOST || "localhost",
-    user: "postgres", //process.env.DB_USER,
-    password: "1234nix", // process.env.DB_PSWD,
+    user:  process.env.DB_USER || "postgres",
+    password:  process.env.DB_PSWD || "1234nix",
     database: process.env.DB_DDBB || "blackboard",
     max: 10,
     min: 0,

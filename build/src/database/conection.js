@@ -5,8 +5,8 @@ const pg_1 = require("pg");
 function dbSinfo() {
     return new pg_1.Pool({
         host: process.env.DB_HOST || "localhost",
-        user: "postgres",
-        password: "1234nix",
+        user: process.env.DB_USER || "postgres",
+        password: process.env.DB_PSWD || "1234nix",
         database: process.env.DB_DDBB || "blackboard",
         max: 10,
         min: 0,
