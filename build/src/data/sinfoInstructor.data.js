@@ -14,23 +14,21 @@ class Data {
     constructor() {
         this.dbSinfo = conection_1.dbSinfo();
         this.dbBlackBoard = conection_1.dbBlackBoard();
-        this.zonal = [];
+    }
+    consulta() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ssql = ` select *
+                from instructores
+                where
+                    estatus not like 'T'
+                order by locacion,apellido  `;
+            const { rows } = yield this.dbBlackBoard.query(ssql);
+            return rows;
+        });
     }
     index() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "select * " +
-                "from vzonal ";
-            const { rows } = yield this.dbSinfo.query(ssql);
-            this.zonal = rows;
-            return this.zonal;
-        });
-    }
-    supervisores() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "select * " +
-                "from supervisores ";
-            const { rows } = yield this.dbSinfo.query(ssql);
-            return rows;
+            return yield this.consulta();
         });
     }
 }

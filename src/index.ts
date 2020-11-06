@@ -17,6 +17,7 @@ import blackboardEnrolamientoRoute from "./routes/blackboardEnrolamiento.route";
 import blackboardCursosRoute from "./routes/blackboardCursos.route";
 import blackboardTermRoute from "./routes/blackboardTerm.route";
 
+import sinfoInstructorRoute from './routes/sinfoInstructor.route'
 import sinfoTutoriaRoute from "./routes/sinfoTutoria.route";
 import sinfoVMatriculaRoute from "./routes/sinfoVMatricula.route";
 import sinfoVZonalRoute from './routes/sinfoVZonal.route'
@@ -62,10 +63,12 @@ class Server {
     this.app.use("/BB/Term", blackboardTermRoute);
     
 
+    this.app.use("/sinfo/instructores", sinfoInstructorRoute )
     this.app.use("/sinfo/tutoria", sinfoTutoriaRoute);
     this.app.use("/sinfo/matricula", sinfoVMatriculaRoute);
     this.app.use("/sinfo/zonal", sinfoVZonalRoute);
     this.app.use('/sinfo/listacruzada', sinfoVLCruzadaRoute)
+    
   }
 
   async start() {

@@ -7,6 +7,12 @@ class Ctrl {
     return res.status(200).json({length:zonal.length,data:zonal});
   }
 
+
+  async supervisores(req: Request, res: Response): Promise<Response | void> {
+    const rst = await data.supervisores();
+    return res.status(200).json({length:rst.length,data:rst});
+  }
+
  
 }
 

@@ -1,6 +1,5 @@
 import { Router } from "express";
-import ctrl from "../controllers/sinfoVZonal.ctrl";
-import { validationToken } from "../lib/token";
+import ctrl from "../controllers/sinfoInstructor.ctrl";
 
 class Rutas {
   router: Router;
@@ -13,7 +12,7 @@ class Rutas {
 
   get() {
     this.router.get("/", ctrl.index);
-    this.router.get('/supervisores', ctrl.supervisores)
+   
   }
 
   post() {}

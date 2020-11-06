@@ -20,6 +20,12 @@ class Ctrl {
             return res.status(200).json({ length: zonal.length, data: zonal });
         });
     }
+    supervisores(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rst = yield sinfoVZonal_data_1.default.supervisores();
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
 }
 const ctrl = new Ctrl();
 exports.default = ctrl;

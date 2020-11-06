@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const sinfoVZonal_ctrl_1 = __importDefault(require("../controllers/sinfoVZonal.ctrl"));
+const sinfoInstructor_ctrl_1 = __importDefault(require("../controllers/sinfoInstructor.ctrl"));
 class Rutas {
     constructor() {
         this.router = express_1.Router();
@@ -12,8 +12,7 @@ class Rutas {
         this.post();
     }
     get() {
-        this.router.get("/", sinfoVZonal_ctrl_1.default.index);
-        this.router.get('/supervisores', sinfoVZonal_ctrl_1.default.supervisores);
+        this.router.get("/", sinfoInstructor_ctrl_1.default.index);
     }
     post() { }
 }

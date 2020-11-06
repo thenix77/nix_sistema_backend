@@ -8,31 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const conection_1 = require("../database/conection");
-class Data {
-    constructor() {
-        this.dbSinfo = conection_1.dbSinfo();
-        this.dbBlackBoard = conection_1.dbBlackBoard();
-        this.zonal = [];
-    }
-    index() {
+const sinfoInstructor_data_1 = __importDefault(require("../data/sinfoInstructor.data"));
+class Ctrl {
+    index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "select * " +
-                "from vzonal ";
-            const { rows } = yield this.dbSinfo.query(ssql);
-            this.zonal = rows;
-            return this.zonal;
-        });
-    }
-    supervisores() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "select * " +
-                "from supervisores ";
-            const { rows } = yield this.dbSinfo.query(ssql);
-            return rows;
+            const rst = yield sinfoInstructor_data_1.default.index();
+            return res.status(200).json({ length: rst.length, data: rst });
         });
     }
 }
-const data = new Data();
-exports.default = data;
+const ctrl = new Ctrl();
+exports.default = ctrl;
