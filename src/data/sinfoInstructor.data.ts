@@ -5,20 +5,19 @@ class Data {
     private dbBlackBoard = dbBlackBoard();
  
     private async consulta() {
-        const ssql =
-            ` select *
-                from instructores
-                where
-                    estatus not like 'T'
-                order by locacion,apellido  `
-
-        const { rows } = await this.dbBlackBoard.query(ssql);
+        const ssql = `select * 
+                        from instructores 
+                        where 
+                        estatus not like 'T' 
+                        order by locacion,apellido`
+        
+        const { rows } = await this.dbSinfo.query(ssql);
 
         return rows
     }
 
     async index() {
-    
+    console.log('aqui')
 
         return await this.consulta();
     }

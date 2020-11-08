@@ -48,6 +48,16 @@ class Ctrl {
 
     return res.status(200).json({ length: rst.length, data: rst });
   }
+
+  async enrolamientoPeriodoRol(req: Request, res: Response): Promise<Response | void> {
+    var PERIODO = req.params.periodo;
+    var ROL = req.params.rol;
+    
+    const rst = await data.EnrolamientoPeriodoRol(PERIODO, ROL);
+
+    return res.status(200).json({ length: rst.length, data: rst });
+  }
+
 }
 
 const ctrl = new Ctrl();

@@ -93,6 +93,13 @@ class Data {
             return rows;
         });
     }
+    EnrolamientoPeriodoRol(periodo, rol) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let rst = yield this.Enrolamiento();
+            rst = rst.filter(r => r.role.toUpperCase() === rol.toUpperCase()).filter(x => x.sourcedid_id === periodo);
+            return rst;
+        });
+    }
 }
 const data = new Data();
 exports.default = data;

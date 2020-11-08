@@ -50,6 +50,14 @@ class Ctrl {
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }
+    enrolamientoPeriodoRol(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var PERIODO = req.params.periodo;
+            var ROL = req.params.rol;
+            const rst = yield blackboardEnrolamiento_data_1.default.EnrolamientoPeriodoRol(PERIODO, ROL);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
 }
 const ctrl = new Ctrl();
 exports.default = ctrl;

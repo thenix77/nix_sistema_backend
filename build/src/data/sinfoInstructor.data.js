@@ -17,17 +17,18 @@ class Data {
     }
     consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = ` select *
-                from instructores
-                where
-                    estatus not like 'T'
-                order by locacion,apellido  `;
-            const { rows } = yield this.dbBlackBoard.query(ssql);
+            const ssql = `select * 
+                        from instructores 
+                        where 
+                        estatus not like 'T' 
+                        order by locacion,apellido`;
+            const { rows } = yield this.dbSinfo.query(ssql);
             return rows;
         });
     }
     index() {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('aqui');
             return yield this.consulta();
         });
     }

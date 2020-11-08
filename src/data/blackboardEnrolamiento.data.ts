@@ -8,7 +8,7 @@ class Data {
   private enrolamiento: IEnrolamiento[] = [];
   private term: ITerm[] = [];
 
-  async Enrolamiento() {
+  async Enrolamiento():Promise<IEnrolamiento[]> {
      const ssql = `
                   SELECT  u.batch_uid,u.user_id, u.firstname, u.lastname, u.student_id, u.email, cm.course_id, 
                           tr.sourcedid_id, cc.Role, u.row_status ,cc.available_ind habilitado 
@@ -90,6 +90,15 @@ class Data {
     
     return rows
     
+  }
+
+
+  async EnrolamientoPeriodoRol(periodo: string, rol: string) {
+    
+    let rst = await this.Enrolamiento()
+    rst = rst.filter(r => r.role.toUpperCase() === rol.toUpperCase()).filter(x => x.sourcedid_id === periodo)
+
+    return rst
   }
 
 }
