@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Ctrl {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('default');
             return res.send('conectado');
         });
     }

@@ -17,10 +17,11 @@ function dbSinfo() {
 exports.dbSinfo = dbSinfo;
 function dbBlackBoard() {
     return new pg_1.Pool({
-        host: process.env.DB_HOST || "senati-dda.blackboard.com",
-        user: process.env.DB_USER || "senatiddauser",
-        password: process.env.DB_PSWD || "mPdMSXiwztc9d6o",
-        database: process.env.DB_DDBB || "BB5eed7aa3f3eed",
+        host: "senati-dda.blackboard.com",
+        user: "senatiddauser",
+        password: "mPdMSXiwztc9d6o",
+        database: "BB5eed7aa3f3eed",
+        port: 5432,
         max: 10,
         min: 0,
         idleTimeoutMillis: 10000,
