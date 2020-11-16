@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
+import data from "../data/sinfoPeriodo.data"
 
 class Ctrl {
     async index(req: Request, res: Response): Promise<Response | void> {
-        console.log('default')
-        return res.status(200).json({status:'onLine'})
+        const rst = await data.index()
+        return res.status(200).json({ length:rst.length , data:rst})
     }
 
 }

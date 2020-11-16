@@ -1,9 +1,10 @@
 import { Pool } from "pg";
 import dotenv from 'dotenv'
-  
+
 export function dbSinfo() {
+  dotenv.config()
+  
   return new Pool({
-    
     host: "localhost",//process.env.DB_HOST || 'ec2-54-157-234-29.compute-1.amazonaws.com',
     user:  "postgres",//process.env.DB_USER || 'ltwjmfnyompypj', 
     password: "1234nix",// process.env.DB_PSWD || '448d691b2faa4230c2dd5cd5d87280e3867909087c1e3ba89c597f86fe9df4f0',// 
@@ -16,14 +17,15 @@ export function dbSinfo() {
 }
 
 export function dbBlackBoard() {
-  return new Pool({
-    host:"senati-dda.blackboard.com",
+    return new Pool({
+    host: "senati-dda.blackboard.com",
     user:  "senatiddauser",
-    password: "mPdMSXiwztc9d6o",
+    password: "mPdMSXiwztc9d6o ",
     database: "BB5eed7aa3f3eed",
-    port:5432,
+    port: 5432,
     max: 10,
     min: 0,
     idleTimeoutMillis: 10000,
+    
   });
 }

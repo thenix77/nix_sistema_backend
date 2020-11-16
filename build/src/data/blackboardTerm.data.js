@@ -18,7 +18,7 @@ class Data {
     }
     consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = ` select  sourcedid_id ,name ,  start_date, end_date
+            const ssql = ` select  sourcedid_id ,name ,start_date, end_date
                   from
                     term
                   where

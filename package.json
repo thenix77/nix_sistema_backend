@@ -6,7 +6,7 @@
   "scripts": {
     "tsc": "tsc -w",
     "start": "node ./build/src/app",
-    "dev": "concurrently \"tsc -w\" \"nodemon ./build/src/app\"",
+    "dev": "concurrently \"tsc -w\" \"nodemon ./src/app\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

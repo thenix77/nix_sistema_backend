@@ -1,8 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dbBlackBoard = exports.dbSinfo = void 0;
 const pg_1 = require("pg");
+const dotenv_1 = __importDefault(require("dotenv"));
 function dbSinfo() {
+    dotenv_1.default.config();
     return new pg_1.Pool({
         host: "localhost",
         user: "postgres",
@@ -19,7 +24,7 @@ function dbBlackBoard() {
     return new pg_1.Pool({
         host: "senati-dda.blackboard.com",
         user: "senatiddauser",
-        password: "mPdMSXiwztc9d6o",
+        password: "mPdMSXiwztc9d6o ",
         database: "BB5eed7aa3f3eed",
         port: 5432,
         max: 10,

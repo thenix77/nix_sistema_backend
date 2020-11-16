@@ -8,7 +8,7 @@ class Data {
 
   private async consulta() {
     const ssql =
-                ` select  sourcedid_id ,name ,  start_date, end_date
+                ` select  sourcedid_id ,name ,start_date, end_date
                   from
                     term
                   where

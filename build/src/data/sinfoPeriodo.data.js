@@ -9,13 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-class Ctrl {
-    index(req, res) {
+const conection_1 = require("../database/conection");
+class Data {
+    constructor() {
+        this.dbSinfo = conection_1.dbSinfo();
+        this.dbBlackBoard = conection_1.dbBlackBoard();
+    }
+    consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('default');
-            return res.status(200).json({ status: 'onLine' });
+            const ssql = `select * 
+                        from term`;
+            const { rows } = yield this.dbSinfo.query(ssql);
+            return rows;
+        });
+    }
+    index() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.consulta();
         });
     }
 }
-const ctrl = new Ctrl();
-exports.default = ctrl;
+const data = new Data();
+exports.default = data;

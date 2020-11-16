@@ -22,6 +22,7 @@ import sinfoTutoriaRoute from "./routes/sinfoTutoria.route";
 import sinfoVMatriculaRoute from "./routes/sinfoVMatricula.route";
 import sinfoVZonalRoute from './routes/sinfoVZonal.route'
 import sinfoVLCruzadaRoute from './routes/sinfoVLCruzada.route'
+import sinfoPeriodoRoute from './routes/sinfoPeriodo.route'
 
 class Server {
   app: express.Application;
@@ -68,6 +69,7 @@ class Server {
     this.app.use("/sinfo/matricula", sinfoVMatriculaRoute);
     this.app.use("/sinfo/zonal", sinfoVZonalRoute);
     this.app.use('/sinfo/listacruzada', sinfoVLCruzadaRoute)
+    this.app.use('/sinfo/periodo', sinfoPeriodoRoute)
     
   }
 
