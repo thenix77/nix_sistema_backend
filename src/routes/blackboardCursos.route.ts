@@ -14,9 +14,8 @@ class Rutas {
     this.router.get("/", ctrl.index);
     this.router.get("/periodo/:periodo", ctrl.cursosPeriodo);
     this.router.get("/periodo/:periodo/:curso", ctrl.cursosPeriodoCurso);
-    this.router.get("/find/:curso", ctrl.cursosFind);
-    this.router.get('/cantidadCursos', ctrl.cantidadCursos)
-    this.router.get('/CantidadAlumnos', ctrl.cantidadAlumnos)
+    this.router.get("/periodo/:periodo/nrc/:nrc", ctrl.cursosPeriodoNrc);
+  
   }
 
   post() {}

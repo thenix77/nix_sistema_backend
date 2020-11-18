@@ -14,42 +14,56 @@ class Data {
     constructor() {
         this.dbSinfo = conection_1.dbSinfo();
         this.dbBlackBoard = conection_1.dbBlackBoard();
-        this.lcnrc = [];
+        this.listacruzadas = [];
+    }
+    ListaCruzada() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ssql = `
+                  select  ce.course_id ,ce.periodo ,l.padre ,course_name 
+                  from bb.cursos_enrolados ce 
+                  inner join bb.listacruzada l  on l.hijo = ce.course_id`;
+            const { rows } = yield this.dbBlackBoard.query(ssql);
+            return this.listacruzadas = rows;
+        });
     }
     index() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "select distinct cm1.course_Id padre,cm2.course_Id hijo " +
-                "from course_users cu " +
-                "left join course_main cm1 on cm1.pk1=crsmain_pk1 " +
-                "left join course_main cm2 on cm2.pk1=child_crsmain_pk1 " +
-                "where child_crsmain_pk1 is not null " +
-                "order by padre, hijo";
-            const { rows } = yield this.dbBlackBoard.query(ssql);
-            this.lcnrc = rows;
-            return this.lcnrc;
+            return yield this.ListaCruzada();
+        });
+    }
+    findPeriodo(PERIODO) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.ListaCruzada();
+            const rst = this.listacruzadas.filter(lc => lc.periodo === PERIODO);
+            return rst;
         });
     }
     findLC(LC) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.lcnrc = yield this.index();
-            const rst = this.lcnrc.filter((data) => data.padre.includes(LC.toUpperCase()));
+            yield this.index();
+            const rst = this.listacruzadas.filter((data) => data.padre.includes(LC.toUpperCase()));
             return rst;
         });
     }
-    findNRC(NRC) {
+    findPeriodoCurso(PERIODO, CURSOID) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.lcnrc = yield this.index();
-            const rst = this.lcnrc.filter((data) => data.hijo.includes(NRC.toUpperCase()));
-            console.log(rst);
-            return rst;
+            this.listacruzadas = yield this.index();
+            return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
+                .filter(lc => lc.course_id === CURSOID);
         });
     }
-    find(FIND) {
+    findPeriodoListaCruzada(PERIODO, LC) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.lcnrc = yield this.index();
-            const rst = this.lcnrc.filter((data) => data.hijo.includes(FIND.toUpperCase()) ||
-                data.padre.includes(FIND.toUpperCase()));
-            return rst;
+            this.listacruzadas = yield this.index();
+            return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
+                .filter(lc => lc.padre === LC);
+        });
+    }
+    findPeriodoFindNrc(PERIODO, NRC) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.listacruzadas = yield this.index();
+            return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
+                .filter(curso => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC);
         });
     }
 }

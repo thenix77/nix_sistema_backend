@@ -12,9 +12,9 @@ class Rutas {
 
   get() {
     this.router.get("/", ctrl.index);
-    this.router.get("/find/:FIND", ctrl.find);
-    this.router.get("/lc/:LC", ctrl.findLC);
-    this.router.get("/nrc/:NRC", ctrl.findNRC);
+    this.router.get("/periodo/:periodo", ctrl.findPeriodo);
+    this.router.get("/periodo/:periodo/:cursoid", ctrl.findPeridoCurso);
+    this.router.get("/periodo/:periodo/nrc/:nrc", ctrl.findPeridoNrc);
   }
 
   post() {}

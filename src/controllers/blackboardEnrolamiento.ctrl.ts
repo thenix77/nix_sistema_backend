@@ -9,13 +9,6 @@ class Ctrl {
   }
 
 
-  async enrolamientoCursos(req:Request, res:Response):Promise<Response | void> {
-    const cursos = await data.EnrolamientoCurso()
-
-    return res.status(200).json({ length : cursos.length , data:cursos})
-    
-  }
-
   async enrolamientoPeriodo(req: Request,res: Response): Promise<Response | void> {
     var PERIODO = req.params.periodo;
     
@@ -24,10 +17,7 @@ class Ctrl {
     return res.status(200).json({ length:rst.length , data:rst });
   }
 
-  async enrolamientoPeriodoCurso(
-    req: Request,
-    res: Response
-  ): Promise<Response | void> {
+  async enrolamientoPeriodoCurso(req: Request,res: Response): Promise<Response | void> {
     var PERIODO = req.params.periodo;
     var CURSOID = req.params.cursoid;
 
@@ -36,28 +26,14 @@ class Ctrl {
     return res.status(200).json({ length: rst.length, data: rst });
   }
 
-  async enrolamientoPeriodoCursoRol(
-    req: Request,
-    res: Response
-  ): Promise<Response | void> {
+  async enrolamientoPeriodoNrc(req: Request,res: Response): Promise<Response | void> {
     var PERIODO = req.params.periodo;
-    var CURSOID = req.params.cursoid;
-    var ROL = req.params.rol;
+    var NRC = req.params.nrc;
 
-    const rst = await data.EnrolamientoPeriodoCursoRol(PERIODO, CURSOID, ROL);
+    const rst = await data.EnrolamientoPeriodoNrc(PERIODO, NRC);
 
     return res.status(200).json({ length: rst.length, data: rst });
   }
-
-  async enrolamientoPeriodoRol(req: Request, res: Response): Promise<Response | void> {
-    var PERIODO = req.params.periodo;
-    var ROL = req.params.rol;
-    
-    const rst = await data.EnrolamientoPeriodoRol(PERIODO, ROL);
-
-    return res.status(200).json({ length: rst.length, data: rst });
-  }
-
 }
 
 const ctrl = new Ctrl();

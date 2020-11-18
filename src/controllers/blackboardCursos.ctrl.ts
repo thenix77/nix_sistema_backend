@@ -14,10 +14,7 @@ class Ctrl {
     return res.status(200).json({ length: cursos.length, cursos });
   }
 
-  async cursosPeriodoCurso(
-    req: Request,
-    res: Response
-  ): Promise<Response | void> {
+  async cursosPeriodoCurso(req: Request,res: Response): Promise<Response | void> {
     const PERIODO = req.params.periodo;
     const CURSO = req.params.curso;
 
@@ -25,29 +22,16 @@ class Ctrl {
     return res.status(200).json({ length: cursos.length, cursos });
   }
 
-  async cursosFind(req: Request, res: Response): Promise<Response | void> {
-    const CURSO = req.params.curso;
-    console.log(CURSO);
-    const cursos = await data.CursosFind(CURSO);
+  async cursosPeriodoNrc(req: Request, res: Response): Promise<Response | void> {
+    const PERIODO = req.params.periodo;
+    const NRC = req.params.nrc;
+    
+    const cursos = await data.CursosPeriodoNrc(PERIODO,NRC);
     return res.status(200).json({ length: cursos.length, cursos });
   }
 
- async cantidadCursos(req: Request, res: Response): Promise<Response | void> {
-   
-   const length = await data.cantidadCursos()
-   
-   
-    return res.status(200).json({ length });
-  }
 
-  async cantidadAlumnos(req: Request, res: Response): Promise<Response | void> {
-   
-   const length = await data.cantidadAlumnos()
-   
-   
-    return res.status(200).json({ length });
-  }
-
+ 
 }
 
 const ctrl = new Ctrl();

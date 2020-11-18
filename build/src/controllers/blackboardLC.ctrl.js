@@ -16,29 +16,31 @@ const blackboardLC_data_1 = __importDefault(require("../data/blackboardLC.data")
 class Ctrl {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const lcnrc = yield blackboardLC_data_1.default.index();
-            return res.status(200).json(lcnrc);
+            const rst = yield blackboardLC_data_1.default.index();
+            return res.status(200).json({ length: rst.length, data: rst });
         });
     }
-    find(req, res) {
+    findPeriodo(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const FIND = req.params.FIND;
-            const rst = yield blackboardLC_data_1.default.find(FIND);
-            return res.status(200).json({ rst });
+            const PERIODO = req.params.periodo;
+            const rst = yield blackboardLC_data_1.default.findPeriodo(PERIODO);
+            return res.status(200).json({ length: rst.length, data: rst });
         });
     }
-    findLC(req, res) {
+    findPeridoCurso(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const LC = req.params.LC;
-            const rst = yield blackboardLC_data_1.default.findLC(LC);
-            return res.status(200).json({ rst });
+            const PERIODO = req.params.periodo;
+            const CURSOID = req.params.cursoid;
+            const rst = yield blackboardLC_data_1.default.findPeriodoCurso(PERIODO, CURSOID);
+            return res.status(200).json({ length: rst.length, data: rst });
         });
     }
-    findNRC(req, res) {
+    findPeridoNrc(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const NRC = req.params.NRC;
-            const rst = yield blackboardLC_data_1.default.findNRC(NRC);
-            return res.status(200).json({ rst });
+            const PERIODO = req.params.periodo;
+            const NRC = req.params.nrc;
+            const rst = yield blackboardLC_data_1.default.findPeriodoFindNrc(PERIODO, NRC);
+            return res.status(200).json({ length: rst.length, data: rst });
         });
     }
 }

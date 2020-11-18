@@ -20,12 +20,6 @@ class Ctrl {
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }
-    enrolamientoCursos(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const cursos = yield blackboardEnrolamiento_data_1.default.EnrolamientoCurso();
-            return res.status(200).json({ length: cursos.length, data: cursos });
-        });
-    }
     enrolamientoPeriodo(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var PERIODO = req.params.periodo;
@@ -41,20 +35,11 @@ class Ctrl {
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }
-    enrolamientoPeriodoCursoRol(req, res) {
+    enrolamientoPeriodoNrc(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var PERIODO = req.params.periodo;
-            var CURSOID = req.params.cursoid;
-            var ROL = req.params.rol;
-            const rst = yield blackboardEnrolamiento_data_1.default.EnrolamientoPeriodoCursoRol(PERIODO, CURSOID, ROL);
-            return res.status(200).json({ length: rst.length, data: rst });
-        });
-    }
-    enrolamientoPeriodoRol(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var PERIODO = req.params.periodo;
-            var ROL = req.params.rol;
-            const rst = yield blackboardEnrolamiento_data_1.default.EnrolamientoPeriodoRol(PERIODO, ROL);
+            var NRC = req.params.nrc;
+            const rst = yield blackboardEnrolamiento_data_1.default.EnrolamientoPeriodoNrc(PERIODO, NRC);
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }

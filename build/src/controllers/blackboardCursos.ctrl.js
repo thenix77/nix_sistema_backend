@@ -35,24 +35,12 @@ class Ctrl {
             return res.status(200).json({ length: cursos.length, cursos });
         });
     }
-    cursosFind(req, res) {
+    cursosPeriodoNrc(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const CURSO = req.params.curso;
-            console.log(CURSO);
-            const cursos = yield blackboardCurso_data_1.default.CursosFind(CURSO);
+            const PERIODO = req.params.periodo;
+            const NRC = req.params.nrc;
+            const cursos = yield blackboardCurso_data_1.default.CursosPeriodoNrc(PERIODO, NRC);
             return res.status(200).json({ length: cursos.length, cursos });
-        });
-    }
-    cantidadCursos(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const length = yield blackboardCurso_data_1.default.cantidadCursos();
-            return res.status(200).json({ length });
-        });
-    }
-    cantidadAlumnos(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const length = yield blackboardCurso_data_1.default.cantidadAlumnos();
-            return res.status(200).json({ length });
         });
     }
 }

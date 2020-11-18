@@ -18,14 +18,14 @@ class Data {
     }
     consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = ` select  sourcedid_id ,name ,start_date, end_date
+            const ssql = ` select  periodo ,name ,start_date, end_date
                   from
-                    term
+                    bb.terms
                   where
                     name not like 'Patrón%' and
                     name not like 'PRUEBA%' and
                     name not like 'Inducción' 
-                  order by sourcedid_id desc `;
+                  order by periodo desc`;
             const { rows } = yield this.dbBlackBoard.query(ssql);
             this.terms = rows;
         });

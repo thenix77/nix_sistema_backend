@@ -1,13 +1,7 @@
-export interface ILcNrc {
-  padre: string;
-  hijo: string;
-}
 
-export interface IVLCruzada{
-  nrc:string
-  cursoid:string
-  patron:string
-  lc:string
-  tipo:string
-  lc_curso:string
+export interface IListaCruzada{
+    course_id:    string,
+    periodo:      string,
+    padre:        string,
+    course_name:  string 
 }

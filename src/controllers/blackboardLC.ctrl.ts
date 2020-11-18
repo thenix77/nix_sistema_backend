@@ -1,37 +1,41 @@
 import { Request, Response } from "express";
 import data from "../data/blackboardLC.data";
-import { ILcNrc } from "../models/listacruzada.model";
+import { IListaCruzada } from "../models/listacruzada.model";
 
 class Ctrl {
   async index(req: Request, res: Response): Promise<Response | void> {
-    const lcnrc: ILcNrc[] = await data.index();
+    const rst: IListaCruzada[] = await data.index();
 
-    return res.status(200).json(lcnrc);
+    return res.status(200).json({length:rst.length , data: rst});
   }
 
-  async find(req: Request, res: Response): Promise<Response | void> {
-    const FIND: string = req.params.FIND;
+  async findPeriodo(req: Request, res: Response): Promise<Response | void> {
+    const PERIODO: string = req.params.periodo;
+    
+    const rst = await data.findPeriodo(PERIODO);
 
-    const rst = await data.find(FIND);
-
-    return res.status(200).json({ rst });
+    return res.status(200).json({ length:rst.length,data: rst });
   }
 
-  async findLC(req: Request, res: Response): Promise<Response | void> {
-    const LC: string = req.params.LC;
+  async findPeridoCurso(req: Request, res: Response): Promise<Response | void> {
+    const PERIODO: string = req.params.periodo;
+    const CURSOID: string = req.params.cursoid;
 
-    const rst = await data.findLC(LC);
+    const rst = await data.findPeriodoCurso(PERIODO,CURSOID);
 
-    return res.status(200).json({ rst });
+    return res.status(200).json({ length:rst.length , data:rst });
   }
 
-  async findNRC(req: Request, res: Response): Promise<Response | void> {
-    const NRC: string = req.params.NRC;
+  async findPeridoNrc(req: Request, res: Response): Promise<Response | void> {
+    const PERIODO: string = req.params.periodo;
+    const NRC: string = req.params.nrc;
 
-    const rst = await data.findNRC(NRC);
+    const rst = await data.findPeriodoFindNrc(PERIODO,NRC);
 
-    return res.status(200).json({ rst });
+    return res.status(200).json({ length:rst.length , data:rst });
   }
+
+
 }
 
 const ctrl = new Ctrl();

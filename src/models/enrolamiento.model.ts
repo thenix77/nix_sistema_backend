@@ -1,13 +1,11 @@
 export interface IEnrolamiento {
-  batch_uid: string;
-  user_id: string;
-  firstname: string;
-  lastname: string;
-  student_id: string;
-  email: string;
-  course_id: string;
-  sourcedid_id: string;
-  role: string;
-  row_status: string;
-  habilitado:string
+  batch_uid:    string,
+  email:        string,
+  lastname:     string,
+  firstname:    string,
+  habilitado:   string,
+  visible:      string,
+  course_id:    string,
+  course_name:  string,
+  periodo:      string 
 }

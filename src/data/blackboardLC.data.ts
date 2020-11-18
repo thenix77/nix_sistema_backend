@@ -1,55 +1,71 @@
 import { dbSinfo, dbBlackBoard } from "../database/conection";
-import { ILcNrc } from "../models/listacruzada.model";
+import { IListaCruzada } from "../models/listacruzada.model";
 
 class Data {
   private dbSinfo = dbSinfo();
   private dbBlackBoard = dbBlackBoard();
-  private lcnrc: ILcNrc[] = [];
+  private listacruzadas: IListaCruzada[] = [];
 
-  async index(): Promise<ILcNrc[]> {
-    const ssql =
-      "select distinct cm1.course_Id padre,cm2.course_Id hijo " +
-      "from course_users cu " +
-      "left join course_main cm1 on cm1.pk1=crsmain_pk1 " +
-      "left join course_main cm2 on cm2.pk1=child_crsmain_pk1 " +
-      "where child_crsmain_pk1 is not null " +
-      "order by padre, hijo";
+  private async ListaCruzada() {
+     const ssql = `
+                  select  ce.course_id ,ce.periodo ,l.padre ,course_name 
+                  from bb.cursos_enrolados ce 
+                  inner join bb.listacruzada l  on l.hijo = ce.course_id`;
 
     const { rows } = await this.dbBlackBoard.query(ssql);
-    this.lcnrc = rows;
+    
+    return this.listacruzadas = rows;
+    
+  }
+  
+  
+  async index(): Promise<IListaCruzada[]> {
+   
+    return await this.ListaCruzada();
+  }
 
-    return this.lcnrc;
+  async findPeriodo(PERIODO:string): Promise<IListaCruzada[]> {
+    await this.ListaCruzada()
+
+    const rst: IListaCruzada[] = this.listacruzadas.filter(lc => lc.periodo === PERIODO)
+
+      return rst
   }
 
   async findLC(LC: string) {
-    this.lcnrc = await this.index();
+    await this.index();
 
-    const rst: ILcNrc[] = this.lcnrc.filter((data) =>
+    const rst: IListaCruzada[] = this.listacruzadas.filter((data) =>
       data.padre.includes(LC.toUpperCase())
     );
     return rst;
   }
 
-  async findNRC(NRC: string) {
-    this.lcnrc = await this.index();
+  async findPeriodoCurso(PERIODO:string ,CURSOID: string) {
+    this.listacruzadas = await this.index();
 
-    const rst: ILcNrc[] = this.lcnrc.filter((data) =>
-      data.hijo.includes(NRC.toUpperCase())
-    );
-    console.log(rst);
-    return rst;
+   
+    return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
+                            .filter(lc => lc.course_id === CURSOID)
   }
-  async find(FIND: string) {
-    this.lcnrc = await this.index();
 
-    const rst: ILcNrc[] = this.lcnrc.filter(
-      (data) =>
-        data.hijo.includes(FIND.toUpperCase()) ||
-        data.padre.includes(FIND.toUpperCase())
-    );
+  async findPeriodoListaCruzada(PERIODO:string ,LC: string) {
+    this.listacruzadas = await this.index();
 
-    return rst;
+   
+    return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
+                            .filter(lc => lc.padre === LC)
   }
+
+  async findPeriodoFindNrc(PERIODO: string, NRC: string) {
+    this.listacruzadas = await this.index()
+
+    return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
+                            .filter(curso => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC )
+  }
+
+
+  
 }
 
 const data = new Data();

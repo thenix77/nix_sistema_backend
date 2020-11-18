@@ -19,16 +19,7 @@ class Data {
     }
     CursosBB() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "SELECT CT.CRSMAIN_PK1, CM.COURSE_ID, TR.SOURCEDID_ID AS PERIODO_ID, TR.NAME AS PERIODO,  " +
-                "to_char(CM.dtcreated,'DD/MM/YYYY') CREADO,  " +
-                "to_char(CM.dtmodified,'DD/MM/YYYY') MODIFICADO,  " +
-                "to_char(CM.START_DATE,'DD/MM/YYYY') INICIO, " +
-                "to_char(CM.END_DATE,'DD/MM/YYYY') FIN, " +
-                "CM.AVAILABLE_IND AS DISPONIBLE, CM.ROW_STATUS AS STATUS, CM.IS_CLOSED_IND AS CERRADO, " +
-                "to_char(TR.START_DATE,'DD/MM/YYYY') PERIODO_INICIO,  " +
-                "to_char(TR.END_DATE,'DD/MM/YYYY') PERIODO_FIN  " +
-                "FROM COURSE_MAIN CM  INNER JOIN COURSE_TERM CT ON CM.PK1=CT.CRSMAIN_PK1 " +
-                "INNER JOIN TERM TR ON CT.term_pk1 =TR.pk1";
+            const ssql = `select * from bb.cursos_enrolados`;
             const { rows } = yield this.dbBlackBoard.query(ssql);
             this.cursos = rows;
             return this.cursos;
@@ -36,17 +27,14 @@ class Data {
     }
     index() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "SELECT name,sourcedid_id,start_date,end_date " +
-                "from  term " +
-                "where available_ind like 'Y'";
-            const { rows } = yield this.dbBlackBoard.query(ssql);
-            return (this.term = rows);
+            const cursos = yield this.CursosBB();
+            return cursos;
         });
     }
     CursosPeriodo(PERIODO) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.CursosBB();
-            const rst = this.cursos.filter((data) => data.periodo_id === PERIODO);
+            const rst = this.cursos.filter((data) => data.periodo === PERIODO);
             return rst;
         });
     }
@@ -54,54 +42,17 @@ class Data {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.CursosBB();
             const rst = this.cursos
-                .filter((data) => data.periodo_id === PERIODO)
-                .filter((data) => data.course_id.includes(CURSOID.toUpperCase()));
+                .filter((data) => data.periodo === PERIODO)
+                .filter((data) => data.course_id === CURSOID.toUpperCase());
             return rst;
         });
     }
-    CursosFind(CURSOID) {
+    CursosPeriodoNrc(PERIODO, NRC) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.CursosBB();
-            const rst = this.cursos.filter((data) => data.course_id.includes(CURSOID.toUpperCase()));
+            const rst = this.cursos.filter(curso => curso.periodo === PERIODO)
+                .filter((curso) => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC);
             return rst;
-        });
-    }
-    cantidadCursos() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "SELECT  u.batch_uid,cm.course_id, tr.sourcedid_id, cc.Role, u.row_status " +
-                "    from course_users cc " +
-                "    inner join Users U on cc.users_pk1 = U.pk1  " +
-                "    inner join Course_main cm on cc.crsmain_pk1 = cm.pk1  " +
-                "    inner join course_term ct on ct.crsmain_pk1 = cm.pk1 " +
-                "    inner join term tr on tr.pk1=ct.term_pk1 " +
-                "    where  " +
-                "      COURSE_ID NOT LIKE 'PATRON-%' AND  " +
-                "      COURSE_ID NOT LIKE 'PARCHE-%' AND  " +
-                "      COURSE_ID NOT LIKE '%INDUCCI%' AND  " +
-                "      COURSE_ID NOT LIKE '%-LC_%' AND " +
-                "      COURSE_ID LIKE '202020%' AND " +
-                "      u.batch_uid NOT LIKE '%_previewuser%'  " +
-                "    order by cc.users_pk1 ";
-            const { rows } = yield this.dbBlackBoard.query(ssql);
-            return rows.length;
-        });
-    }
-    cantidadAlumnos() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "select distinct student_id " +
-                "from( " +
-                "SELECT  u.batch_uid,u.user_id, u.firstname, u.lastname, u.student_id, u.email, cm.course_id, tr.sourcedid_id, cc.Role, u.row_status " +
-                "from course_users cc " +
-                "inner join Users U on cc.users_pk1 = U.pk1 " +
-                "inner join Course_main cm on cc.crsmain_pk1 = cm.pk1 " +
-                "inner join course_term ct on ct.crsmain_pk1 = cm.pk1 " +
-                "inner join term tr on tr.pk1=ct.term_pk1 " +
-                "where COURSE_ID NOT LIKE 'PATRON-%' AND COURSE_ID NOT LIKE '%INDUCCI%' AND u.batch_uid NOT LIKE '%_previewuser%' " +
-                "AND COURSE_ID NOT LIKE '%-LC_%'  " +
-                "order by cc.users_pk1) as bb " +
-                "where sourcedid_id like '202020' and  course_id like '202020%' ";
-            const { rows } = yield this.dbBlackBoard.query(ssql);
-            return rows.length;
         });
     }
 }

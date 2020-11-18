@@ -13,9 +13,9 @@ class Rutas {
     }
     get() {
         this.router.get("/", blackboardLC_ctrl_1.default.index);
-        this.router.get("/find/:FIND", blackboardLC_ctrl_1.default.find);
-        this.router.get("/lc/:LC", blackboardLC_ctrl_1.default.findLC);
-        this.router.get("/nrc/:NRC", blackboardLC_ctrl_1.default.findNRC);
+        this.router.get("/periodo/:periodo", blackboardLC_ctrl_1.default.findPeriodo);
+        this.router.get("/periodo/:periodo/:cursoid", blackboardLC_ctrl_1.default.findPeridoCurso);
+        this.router.get("/periodo/:periodo/nrc/:nrc", blackboardLC_ctrl_1.default.findPeridoNrc);
     }
     post() { }
 }

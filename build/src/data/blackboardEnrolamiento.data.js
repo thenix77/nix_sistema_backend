@@ -19,25 +19,19 @@ class Data {
     }
     Enrolamiento() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = `
-                  SELECT  u.batch_uid,u.user_id, u.firstname, u.lastname, u.student_id, u.email, cm.course_id, 
-                          tr.sourcedid_id, cc.Role, u.row_status ,cc.available_ind habilitado 
-                  from course_users cc 
-                  inner join Users U on cc.users_pk1 = U.pk1 
-                  inner join Course_main cm on cc.crsmain_pk1 = cm.pk1 
-                  inner join course_term ct on ct.crsmain_pk1 = cm.pk1 
-                  inner join term tr on tr.pk1=ct.term_pk1 
-                  where 
+            const ssql = `select u.batch_uid ,u.email ,u.lastname ,u.firstname ,u.visible habilitado,e.visible visible,
+                          ce.course_id ,ce.course_name , ce.periodo 
+                    from bb.enrolamientos e 
+                      inner join bb.usuarios u on u.pk1  = e.users_pk1 
+                      inner join bb.cursos_enrolados ce on  ce.pk1 = e.curso_hijo_pk1 
+                    where 
                     COURSE_ID NOT LIKE 'PATRON-%' AND 
                     COURSE_ID NOT LIKE 'PARCHE-%' AND 
                     COURSE_ID NOT LIKE '%INDUCCI%' AND 
                     COURSE_ID NOT LIKE '%-LC_%' AND 
                     COURSE_ID LIKE '%-NRC_%' AND 
                     U.batch_uid NOT LIKE '%_previewuser%' AND 
-                    CC.ROLE LIKE 'S' or 
-                    cc.role like 'BB_FACILITATOR' or 
-                    cc.role like 'Sup' 
-	                order by cc.users_pk1`;
+                    e.tipo in ('S','BB_FACILITATOR','Sup' )`;
             const { rows } = yield this.dbBlackBoard.query(ssql);
             this.enrolamiento = rows;
             return this.enrolamiento;
@@ -50,53 +44,25 @@ class Data {
     }
     EnrolamientoPeriodo(PERIODO) {
         return __awaiter(this, void 0, void 0, function* () {
-            let rst = yield this.Enrolamiento();
-            return rst.filter(rs => rs.sourcedid_id === PERIODO);
+            let enrolamientos = yield this.Enrolamiento();
+            return enrolamientos.filter(rs => rs.periodo === PERIODO);
         });
     }
     EnrolamientoPeriodoCurso(PERIODO, CURSOID) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.Enrolamiento();
             const rst = this.enrolamiento
-                .filter((dato) => dato.sourcedid_id === PERIODO)
-                .filter((dato) => dato.course_id.includes(CURSOID.toUpperCase()));
+                .filter((dato) => dato.periodo === PERIODO)
+                .filter((dato) => dato.course_id === CURSOID);
             return rst;
         });
     }
-    EnrolamientoPeriodoCursoRol(PERIODO, CURSOID, ROL) {
+    EnrolamientoPeriodoNrc(PERIODO, NRC) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.Enrolamiento();
             const rst = yield this.enrolamiento
-                .filter((dato) => dato.sourcedid_id === PERIODO)
-                .filter((dato) => dato.course_id.includes(CURSOID.toUpperCase()))
-                .filter((dato) => dato.role.toUpperCase() === ROL.toUpperCase());
-            return rst;
-        });
-    }
-    EnrolamientoCurso() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const ssql = `SELECT  u.batch_uid,cm.course_id, tr.sourcedid_id, cc.Role, u.row_status 
-                      from course_users cc
-                      inner join Users U on cc.users_pk1 = U.pk1
-                      inner join Course_main cm on cc.crsmain_pk1 = cm.pk1
-                      inner join course_term ct on ct.crsmain_pk1 = cm.pk1
-                      inner join term tr on tr.pk1=ct.term_pk1
-                      where 
-                        COURSE_ID NOT LIKE 'PATRON-%' AND 
-                        COURSE_ID NOT LIKE 'PARCHE-%' AND 
-                        COURSE_ID NOT LIKE '%INDUCCI%' AND 
-                        COURSE_ID NOT LIKE '%-LC_%' AND 
-                        COURSE_ID LIKE '202020%' AND
-                        u.batch_uid NOT LIKE '%_previewuser%' 
-                      order by cc.users_pk1`;
-            const { rows } = yield this.dbBlackBoard.query(ssql);
-            return rows;
-        });
-    }
-    EnrolamientoPeriodoRol(periodo, rol) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let rst = yield this.Enrolamiento();
-            rst = rst.filter(r => r.role.toUpperCase() === rol.toUpperCase()).filter(x => x.sourcedid_id === periodo);
+                .filter((dato) => dato.periodo === PERIODO)
+                .filter((curso) => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC);
             return rst;
         });
     }

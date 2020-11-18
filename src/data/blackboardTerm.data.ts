@@ -8,14 +8,14 @@ class Data {
 
   private async consulta() {
     const ssql =
-                ` select  sourcedid_id ,name ,start_date, end_date
+                ` select  periodo ,name ,start_date, end_date
                   from
-                    term
+                    bb.terms
                   where
                     name not like 'Patrón%' and
                     name not like 'PRUEBA%' and
                     name not like 'Inducción' 
-                  order by sourcedid_id desc `
+                  order by periodo desc`
 
     const { rows } = await this.dbBlackBoard.query(ssql);
 

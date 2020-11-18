@@ -1,6 +1,6 @@
 export interface ITerm {
   name: string;
-  sourcedid_id: string;
+  periodo: string;
   start_date: Date;
   end_date: Date;
 }
