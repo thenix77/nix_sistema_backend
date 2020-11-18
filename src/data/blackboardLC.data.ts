@@ -32,29 +32,12 @@ class Data {
       return rst
   }
 
-  async findLC(LC: string) {
-    await this.index();
-
-    const rst: IListaCruzada[] = this.listacruzadas.filter((data) =>
-      data.padre.includes(LC.toUpperCase())
-    );
-    return rst;
-  }
-
-  async findPeriodoCurso(PERIODO:string ,CURSOID: string) {
+   async findPeriodoCurso(PERIODO:string ,CURSOID: string) {
     this.listacruzadas = await this.index();
 
    
     return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
                             .filter(lc => lc.course_id === CURSOID)
-  }
-
-  async findPeriodoListaCruzada(PERIODO:string ,LC: string) {
-    this.listacruzadas = await this.index();
-
-   
-    return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
-                            .filter(lc => lc.padre === LC)
   }
 
   async findPeriodoFindNrc(PERIODO: string, NRC: string) {
@@ -64,6 +47,13 @@ class Data {
                             .filter(curso => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC )
   }
 
+  async findPeriodoListaCruzada(PERIODO:string ,LC: string) {
+    this.listacruzadas = await this.index();
+
+   
+    return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
+                            .filter(lc => lc.padre === LC)
+  }
 
   
 }

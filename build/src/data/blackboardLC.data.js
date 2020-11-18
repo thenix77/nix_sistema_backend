@@ -38,13 +38,6 @@ class Data {
             return rst;
         });
     }
-    findLC(LC) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.index();
-            const rst = this.listacruzadas.filter((data) => data.padre.includes(LC.toUpperCase()));
-            return rst;
-        });
-    }
     findPeriodoCurso(PERIODO, CURSOID) {
         return __awaiter(this, void 0, void 0, function* () {
             this.listacruzadas = yield this.index();
@@ -52,18 +45,18 @@ class Data {
                 .filter(lc => lc.course_id === CURSOID);
         });
     }
-    findPeriodoListaCruzada(PERIODO, LC) {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.listacruzadas = yield this.index();
-            return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
-                .filter(lc => lc.padre === LC);
-        });
-    }
     findPeriodoFindNrc(PERIODO, NRC) {
         return __awaiter(this, void 0, void 0, function* () {
             this.listacruzadas = yield this.index();
             return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
                 .filter(curso => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC);
+        });
+    }
+    findPeriodoListaCruzada(PERIODO, LC) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.listacruzadas = yield this.index();
+            return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
+                .filter(lc => lc.padre === LC);
         });
     }
 }
