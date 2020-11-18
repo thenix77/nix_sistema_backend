@@ -29,7 +29,6 @@ const sinfoInstructor_route_1 = __importDefault(require("./routes/sinfoInstructo
 const sinfoTutoria_route_1 = __importDefault(require("./routes/sinfoTutoria.route"));
 const sinfoVMatricula_route_1 = __importDefault(require("./routes/sinfoVMatricula.route"));
 const sinfoVZonal_route_1 = __importDefault(require("./routes/sinfoVZonal.route"));
-const sinfoVLCruzada_route_1 = __importDefault(require("./routes/sinfoVLCruzada.route"));
 const sinfoPeriodo_route_1 = __importDefault(require("./routes/sinfoPeriodo.route"));
 class Server {
     constructor(port) {
@@ -64,7 +63,6 @@ class Server {
         this.app.use("/sinfo/tutoria", sinfoTutoria_route_1.default);
         this.app.use("/sinfo/matricula", sinfoVMatricula_route_1.default);
         this.app.use("/sinfo/zonal", sinfoVZonal_route_1.default);
-        this.app.use('/sinfo/listacruzada', sinfoVLCruzada_route_1.default);
         this.app.use('/sinfo/periodo', sinfoPeriodo_route_1.default);
     }
     start() {
