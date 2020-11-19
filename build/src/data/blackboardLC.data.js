@@ -18,10 +18,7 @@ class Data {
     }
     ListaCruzada() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = `
-                  select  ce.course_id ,ce.periodo ,l.padre ,course_name 
-                  from bb.cursos_enrolados ce 
-                  inner join bb.listacruzada l  on l.hijo = ce.course_id`;
+            const ssql = `select  * from vlcruzada`;
             const { rows } = yield this.dbBlackBoard.query(ssql);
             return this.listacruzadas = rows;
         });
@@ -42,21 +39,21 @@ class Data {
         return __awaiter(this, void 0, void 0, function* () {
             this.listacruzadas = yield this.index();
             return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
-                .filter(lc => lc.course_id === CURSOID);
+                .filter(lc => lc.cursoid === CURSOID);
         });
     }
     findPeriodoFindNrc(PERIODO, NRC) {
         return __awaiter(this, void 0, void 0, function* () {
             this.listacruzadas = yield this.index();
             return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
-                .filter(curso => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC);
+                .filter(curso => curso.cursoid.substring(curso.cursoid.indexOf('_') + 1, curso.cursoid.length) === NRC);
         });
     }
     findPeriodoListaCruzada(PERIODO, LC) {
         return __awaiter(this, void 0, void 0, function* () {
             this.listacruzadas = yield this.index();
             return this.listacruzadas.filter(lc => lc.periodo === PERIODO)
-                .filter(lc => lc.padre === LC);
+                .filter(lc => lc.lc_curso === LC);
         });
     }
 }
