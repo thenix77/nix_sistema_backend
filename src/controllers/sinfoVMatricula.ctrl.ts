@@ -32,6 +32,14 @@ class Ctrl {
     return res.status(200).json({ length: rst });
   }
 
+  async apexMatPeriodNrcs(req: Request, res: Response): Promise<Response | void> {
+    const periodo = req.params.periodo
+    const nrcs = req.params.nrcs
+
+    const rst = await data.sinfoMatPeriodoNrcs(periodo,nrcs)
+    return res.status(200).json({ length: rst.length ,data:rst});
+  }
+
   
 }
 

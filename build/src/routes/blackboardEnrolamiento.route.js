@@ -16,6 +16,8 @@ class Rutas {
         this.router.get("/periodo/:periodo", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodo);
         this.router.get("/periodo/:periodo/:cursoid", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoCurso);
         this.router.get("/periodo/:periodo/nrc/:nrc", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoNrc);
+        this.router.get("/periodo/:periodo/nrcs/:nrcs", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoNrcs);
+        this.router.get("/periodo/:periodo/nrc/:nrc/rol/:rol", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoNrcRol);
     }
     post() { }
 }

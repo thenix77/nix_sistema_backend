@@ -14,26 +14,18 @@ class Data {
     constructor() {
         this.dbSinfo = conection_1.dbSinfo();
         this.dbBlackBoard = conection_1.dbBlackBoard();
-        this.terms = [];
     }
     consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = ` select  name ,periodo as sourcedid_id,start_date, end_date
-                  from
-                    bb.terms
-                  where
-                    name not like 'Patrón%' and
-                    name not like 'PRUEBA%' and
-                    name not like 'Inducción' 
-                  order by periodo desc`;
-            const { rows } = yield this.dbBlackBoard.query(ssql);
-            this.terms = rows;
+            const ssql = `select * 
+                        from term`;
+            const { rows } = yield this.dbSinfo.query(ssql);
+            return rows;
         });
     }
     index() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.consulta();
-            return this.terms;
+            return yield this.consulta();
         });
     }
 }

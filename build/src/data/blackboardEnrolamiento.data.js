@@ -15,26 +15,27 @@ class Data {
         this.dbSinfo = conection_1.dbSinfo();
         this.dbBlackBoard = conection_1.dbBlackBoard();
         this.enrolamiento = [];
-        this.term = [];
     }
     Enrolamiento() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = `select u.batch_uid ,u.email ,u.lastname ,u.firstname ,u.visible habilitado,e.visible visible,
-                          ce.course_id ,ce.course_name , ce.periodo 
-                    from bb.enrolamientos e 
-                      inner join bb.usuarios u on u.pk1  = e.users_pk1 
-                      inner join bb.cursos_enrolados ce on  ce.pk1 = e.curso_hijo_pk1 
-                    where 
-                    COURSE_ID NOT LIKE 'PATRON-%' AND 
-                    COURSE_ID NOT LIKE 'PARCHE-%' AND 
-                    COURSE_ID NOT LIKE '%INDUCCI%' AND 
-                    COURSE_ID NOT LIKE '%-LC_%' AND 
-                    COURSE_ID LIKE '%-NRC_%' AND 
-                    U.batch_uid NOT LIKE '%_previewuser%' AND 
-                    e.tipo in ('S','BB_FACILITATOR','Sup' )`;
+            const ssql = `select * from bb.vmatbb`;
             const { rows } = yield this.dbBlackBoard.query(ssql);
             this.enrolamiento = rows;
             return this.enrolamiento;
+        });
+    }
+    consulta(periodo, nrcs) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let values = [];
+            let newNrcs = nrcs.split(',');
+            var setvs = (vs) => vs.map((v) => '$' + (values.push(v))).join();
+            const ssql = "select * " +
+                "from bb.vmatbb" +
+                " where " +
+                "       periodo like '" + periodo + "' and " +
+                "       nrc in (" + setvs(newNrcs) + ")";
+            const { rows } = yield this.dbSinfo.query(ssql, newNrcs);
+            return rows;
         });
     }
     index() {
@@ -63,6 +64,21 @@ class Data {
             const rst = yield this.enrolamiento
                 .filter((dato) => dato.periodo === PERIODO)
                 .filter((curso) => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC);
+            return rst;
+        });
+    }
+    EnrolamientoPeriodoNrcs(PERIODO, NRCs) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.consulta(PERIODO, NRCs);
+        });
+    }
+    enrolamientoPeriodoNrcRol(PERIODO, NRC, ROL) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.Enrolamiento();
+            const rst = yield this.enrolamiento
+                .filter((dato) => dato.periodo === PERIODO)
+                .filter(dato => dato.role.toUpperCase() === ROL.toUpperCase())
+                .filter((curso) => curso.nrc === NRC);
             return rst;
         });
     }

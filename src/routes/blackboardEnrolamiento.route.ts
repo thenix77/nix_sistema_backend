@@ -15,6 +15,8 @@ class Rutas {
     this.router.get("/periodo/:periodo", ctrl.enrolamientoPeriodo)
     this.router.get("/periodo/:periodo/:cursoid", ctrl.enrolamientoPeriodoCurso)
     this.router.get("/periodo/:periodo/nrc/:nrc", ctrl.enrolamientoPeriodoNrc)
+    this.router.get("/periodo/:periodo/nrcs/:nrcs", ctrl.enrolamientoPeriodoNrcs)
+    this.router.get("/periodo/:periodo/nrc/:nrc/rol/:rol", ctrl.enrolamientoPeriodoNrcRol)
   }
 
   post() {}

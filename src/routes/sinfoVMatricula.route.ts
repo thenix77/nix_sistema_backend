@@ -16,7 +16,8 @@ class Rutas {
     this.router.get("/idalumno/:idalumno", validationToken, ctrl.idalumno);
     this.router.get("/idcurso/:idcurso", validationToken, ctrl.idcurso);
     this.router.get('/cantidadCursos', ctrl.cantidadCursos)
-    this.router.get('/cantidadAlumnos', ctrl.cantidadAlumnos )
+    this.router.get('/cantidadAlumnos', ctrl.cantidadAlumnos)
+    this.router.get('/periodo/:periodo/nrcs/:nrcs', ctrl.apexMatPeriodNrcs )
   }
 
   post() {}

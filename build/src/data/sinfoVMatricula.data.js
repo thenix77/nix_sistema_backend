@@ -18,9 +18,23 @@ class Data {
     }
     Consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "select * from vmatriculabb";
+            const ssql = "select * from sinfo.vmatapex";
             const { rows } = yield this.dbSinfo.query(ssql);
             this.matriculas = rows;
+        });
+    }
+    consultaMasiva(periodo, nrcs) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let values = [];
+            let newNrcs = nrcs.split(',');
+            var setvs = (vs) => vs.map((v) => '$' + (values.push(v))).join();
+            const ssql = "select * " +
+                "from sinfo.vmatapex" +
+                " where " +
+                "       periodo like '" + periodo + "' and " +
+                "       nrc in (" + setvs(newNrcs) + ")";
+            const { rows } = yield this.dbSinfo.query(ssql, newNrcs);
+            return rows;
         });
     }
     index() {
@@ -45,16 +59,21 @@ class Data {
     }
     cantidadCursos() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = 'select distinct cursoid from vmatriculabb';
+            const ssql = 'select distinct cursoid from sinfo.vmatapex';
             const { rows } = yield this.dbSinfo.query(ssql);
             return rows.length;
         });
     }
     cantidadAlumnos() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = 'select distinct id_alumno from vmatriculabb';
+            const ssql = 'select distinct id_alumno from sinfo.vmatapex';
             const { rows } = yield this.dbSinfo.query(ssql);
             return rows.length;
+        });
+    }
+    sinfoMatPeriodoNrcs(PERIODO, NRCs) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.consultaMasiva(PERIODO, NRCs);
         });
     }
 }

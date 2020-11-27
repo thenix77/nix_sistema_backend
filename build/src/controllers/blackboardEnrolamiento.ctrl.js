@@ -43,6 +43,23 @@ class Ctrl {
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }
+    enrolamientoPeriodoNrcs(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var PERIODO = req.params.periodo;
+            var NRCs = req.params.nrcs;
+            const rst = yield blackboardEnrolamiento_data_1.default.EnrolamientoPeriodoNrcs(PERIODO, NRCs);
+            return res.status(200).json({ length: (rst) ? rst.length : 0, data: rst });
+        });
+    }
+    enrolamientoPeriodoNrcRol(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var PERIODO = req.params.periodo;
+            var NRC = req.params.nrc;
+            let ROL = req.params.rol;
+            const rst = yield blackboardEnrolamiento_data_1.default.enrolamientoPeriodoNrcRol(PERIODO, NRC, ROL);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
 }
 const ctrl = new Ctrl();
 exports.default = ctrl;

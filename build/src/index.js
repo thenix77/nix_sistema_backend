@@ -25,11 +25,14 @@ const blackboardLC_route_1 = __importDefault(require("./routes/blackboardLC.rout
 const blackboardEnrolamiento_route_1 = __importDefault(require("./routes/blackboardEnrolamiento.route"));
 const blackboardCursos_route_1 = __importDefault(require("./routes/blackboardCursos.route"));
 const blackboardTerm_route_1 = __importDefault(require("./routes/blackboardTerm.route"));
+const blackboardRetiros_route_1 = __importDefault(require("./routes/blackboardRetiros.route"));
 const sinfoInstructor_route_1 = __importDefault(require("./routes/sinfoInstructor.route"));
 const sinfoTutoria_route_1 = __importDefault(require("./routes/sinfoTutoria.route"));
 const sinfoVMatricula_route_1 = __importDefault(require("./routes/sinfoVMatricula.route"));
 const sinfoVZonal_route_1 = __importDefault(require("./routes/sinfoVZonal.route"));
 const sinfoPeriodo_route_1 = __importDefault(require("./routes/sinfoPeriodo.route"));
+const sinfoSupervisores_route_1 = __importDefault(require("./routes/sinfoSupervisores.route"));
+const bbsinfo_route_1 = __importDefault(require("./routes/bbsinfo.route"));
 class Server {
     constructor(port) {
         this.port = port;
@@ -59,11 +62,14 @@ class Server {
         this.app.use("/BB/Enrolamiento", blackboardEnrolamiento_route_1.default);
         this.app.use("/BB/Cursos", blackboardCursos_route_1.default);
         this.app.use("/BB/Term", blackboardTerm_route_1.default);
+        this.app.use("/BB/Retiros", blackboardRetiros_route_1.default);
         this.app.use("/sinfo/instructores", sinfoInstructor_route_1.default);
         this.app.use("/sinfo/tutoria", sinfoTutoria_route_1.default);
         this.app.use("/sinfo/matricula", sinfoVMatricula_route_1.default);
         this.app.use("/sinfo/zonal", sinfoVZonal_route_1.default);
+        this.app.use('/sinfo/supervisores', sinfoSupervisores_route_1.default);
         this.app.use('/sinfo/periodo', sinfoPeriodo_route_1.default);
+        this.app.use('/BBsinfo', bbsinfo_route_1.default);
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {

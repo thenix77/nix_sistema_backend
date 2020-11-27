@@ -46,6 +46,14 @@ class Ctrl {
             return res.status(200).json({ length: rst });
         });
     }
+    apexMatPeriodNrcs(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const periodo = req.params.periodo;
+            const nrcs = req.params.nrcs;
+            const rst = yield sinfoVMatricula_data_1.default.sinfoMatPeriodoNrcs(periodo, nrcs);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
 }
 const ctrl = new Ctrl();
 exports.default = ctrl;

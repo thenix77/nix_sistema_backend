@@ -16,12 +16,16 @@ import blackboardLCRoute from "./routes/blackboardLC.route";
 import blackboardEnrolamientoRoute from "./routes/blackboardEnrolamiento.route";
 import blackboardCursosRoute from "./routes/blackboardCursos.route";
 import blackboardTermRoute from "./routes/blackboardTerm.route";
+import blackboardRetirosRoute from './routes/blackboardRetiros.route'
 
 import sinfoInstructorRoute from './routes/sinfoInstructor.route'
 import sinfoTutoriaRoute from "./routes/sinfoTutoria.route";
 import sinfoVMatriculaRoute from "./routes/sinfoVMatricula.route";
 import sinfoVZonalRoute from './routes/sinfoVZonal.route'
 import sinfoPeriodoRoute from './routes/sinfoPeriodo.route'
+import sinfoSupervisoresRoute from './routes/sinfoSupervisores.route'
+
+import bbSinfoRoute from './routes/bbsinfo.route'
 
 class Server {
   app: express.Application;
@@ -61,13 +65,17 @@ class Server {
     this.app.use("/BB/Enrolamiento", blackboardEnrolamientoRoute);
     this.app.use("/BB/Cursos", blackboardCursosRoute);
     this.app.use("/BB/Term", blackboardTermRoute);
+    this.app.use("/BB/Retiros", blackboardRetirosRoute);
     
 
     this.app.use("/sinfo/instructores", sinfoInstructorRoute )
     this.app.use("/sinfo/tutoria", sinfoTutoriaRoute);
     this.app.use("/sinfo/matricula", sinfoVMatriculaRoute);
     this.app.use("/sinfo/zonal", sinfoVZonalRoute);
+    this.app.use('/sinfo/supervisores' , sinfoSupervisoresRoute)
     this.app.use('/sinfo/periodo', sinfoPeriodoRoute)
+
+    this.app.use('/BBsinfo', bbSinfoRoute)
     
   }
 

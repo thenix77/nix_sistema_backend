@@ -7,11 +7,28 @@ class Data {
   private matriculas: IVMatricula[] = [];
 
   private async Consulta() {
-    const ssql = "select * from vmatriculabb";
+    const ssql = "select * from sinfo.vmatapex"
 
     const { rows } = await this.dbSinfo.query(ssql);
     this.matriculas = rows;
   }
+
+  private async consultaMasiva(periodo: string, nrcs: string): Promise<IVMatricula[] | void> {
+        let values = []
+        let newNrcs = nrcs.split(',')
+        var setvs = (vs:string[]) => vs.map((v:string) => '$' + (values.push(v))).join();
+        
+        
+        const ssql = "select * "+
+                     "from sinfo.vmatapex"+
+                     " where "+
+                     "       periodo like '"+ periodo+"' and "+
+                     "       nrc in (" + setvs(newNrcs) + ")"
+         
+        const { rows}= await this.dbSinfo.query(ssql,newNrcs)  
+
+        return rows
+    }
 
   async index(): Promise<IVMatricula[]> {
     await this.Consulta();
@@ -38,7 +55,7 @@ class Data {
   }
 
   async cantidadCursos() {
-      const ssql = 'select distinct cursoid from vmatriculabb'
+      const ssql = 'select distinct cursoid from sinfo.vmatapex'
       const { rows } = await this.dbSinfo.query(ssql);
     
     
@@ -46,7 +63,7 @@ class Data {
   }
 
   async cantidadAlumnos() {
-      const ssql = 'select distinct id_alumno from vmatriculabb'
+      const ssql = 'select distinct id_alumno from sinfo.vmatapex'
       const { rows } = await this.dbSinfo.query(ssql);
     
     
@@ -54,6 +71,10 @@ class Data {
   }
 
 
+  async sinfoMatPeriodoNrcs(PERIODO:string,NRCs:string) {
+    
+    return await this.consultaMasiva(PERIODO,NRCs);
+  }
 }
 
 const data = new Data();
