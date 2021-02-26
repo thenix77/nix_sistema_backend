@@ -11,15 +11,16 @@ class Ctrl {
     const PERIODO = req.params.periodo;
 
     const cursos = await data.CursosPeriodo(PERIODO);
-    return res.status(200).json({ length: cursos.length, cursos });
+    return res.status(200).json({ length: cursos.length, data:cursos });
   }
-
+  
+  
   async cursosPeriodoCurso(req: Request,res: Response): Promise<Response | void> {
     const PERIODO = req.params.periodo;
     const CURSO = req.params.curso;
 
     const cursos = await data.CursosPeriodoCurso(PERIODO, CURSO);
-    return res.status(200).json({ length: cursos.length, cursos });
+    return res.status(200).json({ length: cursos.length, data:cursos });
   }
 
   async cursosPeriodoNrc(req: Request, res: Response): Promise<Response | void> {

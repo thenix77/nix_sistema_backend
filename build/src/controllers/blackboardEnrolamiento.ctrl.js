@@ -30,8 +30,16 @@ class Ctrl {
     enrolamientoPeriodoCurso(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var PERIODO = req.params.periodo;
-            var CURSOID = req.params.cursoid;
+            var CURSOID = req.params.idcurso;
             const rst = yield blackboardEnrolamiento_data_1.default.EnrolamientoPeriodoCurso(PERIODO, CURSOID);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
+    enrolamientoPeriodoAlumno(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var PERIODO = req.params.periodo;
+            var IDALUMNO = req.params.idalumno;
+            const rst = yield blackboardEnrolamiento_data_1.default.EnrolamientoPeriodoAlumno(PERIODO, IDALUMNO);
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }
@@ -57,6 +65,15 @@ class Ctrl {
             var NRC = req.params.nrc;
             let ROL = req.params.rol;
             const rst = yield blackboardEnrolamiento_data_1.default.enrolamientoPeriodoNrcRol(PERIODO, NRC, ROL);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
+    enrolamientoPeriodoCursoAlumno(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var PERIODO = req.params.periodo;
+            var IDCURSO = req.params.idcurso;
+            let IDALUMNO = req.params.idalumno;
+            const rst = yield blackboardEnrolamiento_data_1.default.enrolamientoPeriodoCursoAlumno(PERIODO, IDCURSO, IDALUMNO);
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }

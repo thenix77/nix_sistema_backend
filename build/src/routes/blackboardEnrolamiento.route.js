@@ -14,10 +14,12 @@ class Rutas {
     get() {
         this.router.get("/", blackboardEnrolamiento_ctrl_1.default.index);
         this.router.get("/periodo/:periodo", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodo);
-        this.router.get("/periodo/:periodo/:cursoid", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoCurso);
+        this.router.get("/periodo/:periodo/:idcurso", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoCurso);
         this.router.get("/periodo/:periodo/nrc/:nrc", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoNrc);
+        this.router.get("/periodo/:periodo/idalumno/:idalumno", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoAlumno);
         this.router.get("/periodo/:periodo/nrcs/:nrcs", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoNrcs);
-        this.router.get("/periodo/:periodo/nrc/:nrc/rol/:rol", blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoNrcRol);
+        //this.router.get("/periodo/:periodo/nrc/:nrc/rol/:rol", ctrl.enrolamientoPeriodoNrcRol)
+        this.router.get('/periodo/:periodo/curso/:idcurso/alumno/:idalumno', blackboardEnrolamiento_ctrl_1.default.enrolamientoPeriodoCursoAlumno);
     }
     post() { }
 }

@@ -45,15 +45,26 @@ class Data {
     return enrolamientos.filter(rs => rs.periodo === PERIODO)
   }
 
-  async EnrolamientoPeriodoCurso(PERIODO: string, CURSOID: string) {
+  async EnrolamientoPeriodoAlumno(PERIODO: string, IDALUMNO: string) {
     
     await this.Enrolamiento()
 
     const rst: IEnrolamiento[] = this.enrolamiento
       .filter((dato) => dato.periodo === PERIODO)
-      .filter((dato) => dato.course_id === CURSOID);
+      .filter((dato) => dato.batch_uid === IDALUMNO);
 
     return rst;
+  }
+
+  async EnrolamientoPeriodoCurso(PERIODO: string, CURSOID: string) {
+    
+    await this.Enrolamiento()
+
+    const rst: IEnrolamiento[] = this.enrolamiento
+      .filter((dato:IEnrolamiento) => dato.periodo === PERIODO)
+      .filter((dato:IEnrolamiento) => dato.course_id.trim() === CURSOID.trim() );
+
+    return rst
   }
 
   async EnrolamientoPeriodoNrc(PERIODO: string,NRC: string) {
@@ -62,7 +73,7 @@ class Data {
     const rst: IEnrolamiento[] = await this.enrolamiento
       .filter((dato) => dato.periodo === PERIODO)
       .filter((curso) => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC )
-      
+     
     return rst;
   }
 
@@ -78,11 +89,21 @@ class Data {
     const rst: IEnrolamiento[] = await this.enrolamiento
       .filter((dato) => dato.periodo === PERIODO)
       .filter( dato => dato.role.toUpperCase() === ROL.toUpperCase())
-      .filter((curso) => curso.nrc === NRC)
+      .filter((curso) => curso.course_id.includes(NRC))
       
      return rst;
   }
+  
+  async enrolamientoPeriodoCursoAlumno(periodo: string,idcurso: string, idalumno:string) {
+      await this.Enrolamiento();
 
+      const rst: IEnrolamiento[] = await this.enrolamiento
+        .filter((dato:IEnrolamiento) => dato.periodo === periodo)
+        .filter((dato:IEnrolamiento) => dato.course_id === idcurso)
+        .filter((curso:IEnrolamiento) => curso.batch_uid === idalumno)
+        
+      return rst;
+    }
 }
 
 const data = new Data();

@@ -32,7 +32,7 @@ class Data {
 
     return rst;
   }
-
+  
   async CursosPeriodoCurso(PERIODO: string, CURSOID: string) {
     await this.CursosBB();
     const rst: ICursos[] = this.cursos

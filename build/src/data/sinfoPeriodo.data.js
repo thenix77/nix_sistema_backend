@@ -18,7 +18,7 @@ class Data {
     consulta() {
         return __awaiter(this, void 0, void 0, function* () {
             const ssql = `select * 
-                        from term`;
+                        from sinfo.vperiodo`;
             const { rows } = yield this.dbSinfo.query(ssql);
             return rows;
         });

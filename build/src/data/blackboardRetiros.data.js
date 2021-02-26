@@ -17,12 +17,18 @@ class Data {
     }
     consulta(periodo) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = `select *
-                        from bb.vmatbb v 
-                        where
-                            v.batch_uid in (select vr.id_alumno from vretirados vr where vr.periodo = '${periodo}') and
-                            v.periodo = '${periodo}' and v.role like 'S'`;
-            const { rows } = yield this.dbBlackBoard.query(ssql);
+            const ssql = `select  r.id_alumno , bb.course_id ,fretiro ,r.nombre ,
+                        concat('USUARIO_PATCH-VisibleYN $token $URL_sitio externalId:',r.id_alumno ,' No') scriptAlumno, 
+                        concat('ENROLAMIENTO_PATCH-Visibilidad $token $URL_sitio courseId:',bb.course_id ,' externalId:',bb.batch_uid ,' No') scriptCurso 
+                        from sinfo.vretirados r 
+                        inner join bb.vmatbb bb on bb.batch_uid = r.id_alumno 
+                        where 	
+                            bb."role" ='S' and 
+                            --extract (month from r.fretiro) = extract (month from now())  and 
+                            extract (month from r.fretiro) > 7  and
+                            bb.usuariovisiblecurso like 'Y' 
+                            and bb.periodo like $1`;
+            const { rows } = yield this.dbBlackBoard.query(ssql, [periodo]);
             return rows;
         });
     }

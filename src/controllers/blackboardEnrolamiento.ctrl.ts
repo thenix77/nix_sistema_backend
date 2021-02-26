@@ -19,9 +19,19 @@ class Ctrl {
 
   async enrolamientoPeriodoCurso(req: Request,res: Response): Promise<Response | void> {
     var PERIODO = req.params.periodo;
-    var CURSOID = req.params.cursoid;
+    var CURSOID = req.params.idcurso;
 
     const rst = await data.EnrolamientoPeriodoCurso(PERIODO, CURSOID);
+
+    return res.status(200).json({ length: rst.length, data: rst });
+  }
+
+  
+  async enrolamientoPeriodoAlumno(req: Request,res: Response): Promise<Response | void> {
+    var PERIODO = req.params.periodo;
+    var IDALUMNO = req.params.idalumno;
+
+    const rst = await data.EnrolamientoPeriodoAlumno(PERIODO, IDALUMNO);
 
     return res.status(200).json({ length: rst.length, data: rst });
   }
@@ -53,6 +63,17 @@ class Ctrl {
    
     return res.status(200).json({ length: rst.length, data: rst });
   }
+  
+  async enrolamientoPeriodoCursoAlumno(req: Request,res: Response): Promise<Response | void> {
+    var PERIODO = req.params.periodo;
+    var IDCURSO = req.params.idcurso;
+    let IDALUMNO = req.params.idalumno
+
+    const rst = await data.enrolamientoPeriodoCursoAlumno(PERIODO, IDCURSO, IDALUMNO);
+   
+    return res.status(200).json({ length: rst.length, data: rst });
+  }
+
 }
 
 const ctrl = new Ctrl();

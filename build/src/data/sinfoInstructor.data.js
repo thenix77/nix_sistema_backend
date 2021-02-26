@@ -17,19 +17,22 @@ class Data {
     }
     consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = `select * 
-                        from instructores 
-                        where 
-                        estatus not like 'T' 
-                        order by locacion,apellido`;
+            const ssql = `select * from sinfo.vinstructor`;
             const { rows } = yield this.dbSinfo.query(ssql);
             return rows;
         });
     }
     index() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('aqui');
-            return yield this.consulta();
+            const ssql = yield this.consulta();
+            return ssql;
+        });
+    }
+    findxInstructor(idInstructor) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ssql = yield this.consulta();
+            const rst = ssql.filter((i) => i.id_inst === idInstructor);
+            return rst;
         });
     }
 }

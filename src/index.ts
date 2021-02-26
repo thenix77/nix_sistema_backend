@@ -18,14 +18,18 @@ import blackboardCursosRoute from "./routes/blackboardCursos.route";
 import blackboardTermRoute from "./routes/blackboardTerm.route";
 import blackboardRetirosRoute from './routes/blackboardRetiros.route'
 
-import sinfoInstructorRoute from './routes/sinfoInstructor.route'
-import sinfoTutoriaRoute from "./routes/sinfoTutoria.route";
-import sinfoVMatriculaRoute from "./routes/sinfoVMatricula.route";
-import sinfoVZonalRoute from './routes/sinfoVZonal.route'
-import sinfoPeriodoRoute from './routes/sinfoPeriodo.route'
+
 import sinfoSupervisoresRoute from './routes/sinfoSupervisores.route'
 
-import bbSinfoRoute from './routes/bbsinfo.route'
+/** */
+import sinfoVCursoRoute from './routes/sinfovcurso.route'
+import sinfoVEnrolamientoRoute from './routes/sinfoVEnrolamiento.route'
+import sinfoVHorariosRoute from './routes/sinfoVhorarios.route'
+import sinfoVInstEnrolamientoRoute from './routes/sinfoVInstEnrolamiento.route'
+import sinfoVMatrNrcRoute from './routes/sinfoVMatNrc.route'
+import sinfoVInstructorRoute from './routes/sinfoVInstructor.route'
+import sinfoVPeriodoRoute from './routes/sinfoVPeriodo.route'
+import sinfoVTutoriaRoute from "./routes/sinfovtutoria.route"
 
 class Server {
   app: express.Application;
@@ -66,17 +70,18 @@ class Server {
     this.app.use("/BB/Cursos", blackboardCursosRoute);
     this.app.use("/BB/Term", blackboardTermRoute);
     this.app.use("/BB/Retiros", blackboardRetirosRoute);
-    
-
-    this.app.use("/sinfo/instructores", sinfoInstructorRoute )
-    this.app.use("/sinfo/tutoria", sinfoTutoriaRoute);
-    this.app.use("/sinfo/matricula", sinfoVMatriculaRoute);
-    this.app.use("/sinfo/zonal", sinfoVZonalRoute);
+   
     this.app.use('/sinfo/supervisores' , sinfoSupervisoresRoute)
-    this.app.use('/sinfo/periodo', sinfoPeriodoRoute)
-
-    this.app.use('/BBsinfo', bbSinfoRoute)
-    
+   
+    /** */
+    this.app.use('/sinfo/vista/cursos', sinfoVCursoRoute)
+    this.app.use('/sinfo/vista/enrolamiento', sinfoVEnrolamientoRoute)
+    this.app.use('/sinfo/vista/horarios', sinfoVHorariosRoute)
+    this.app.use('/sinfo/vista/instenrolamiento', sinfoVInstEnrolamientoRoute)
+    this.app.use("/sinfo/vista/instructores", sinfoVInstructorRoute)
+    this.app.use("/sinfo/vista/matrnrc", sinfoVMatrNrcRoute)
+    this.app.use('/sinfo/vista/periodos', sinfoVPeriodoRoute)
+    this.app.use('/sinfo/vista/tutoria', sinfoVTutoriaRoute)
   }
 
   async start() {

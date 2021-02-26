@@ -23,7 +23,21 @@ class Ctrl {
     idalumno(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const IDALUMNO = req.params.idalumno;
-            const rst = yield sinfoVMatricula_data_1.default.idalumno(IDALUMNO);
+            const rst = yield sinfoVMatricula_data_1.default.idAlumno(IDALUMNO);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
+    idInstructor(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const IDINSTRUCTOR = req.params.idinstructor;
+            const rst = yield sinfoVMatricula_data_1.default.idInstructor(IDINSTRUCTOR);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
+    Nrc(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const NRC = req.params.nrc;
+            const rst = yield sinfoVMatricula_data_1.default.Nrc(NRC);
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }

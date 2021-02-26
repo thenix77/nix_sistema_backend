@@ -18,7 +18,7 @@ class Data {
     }
     Consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = "select * from sinfo.vmatapex";
+            const ssql = "select * from sinfo.vmatsinfo order by calificable";
             const { rows } = yield this.dbSinfo.query(ssql);
             this.matriculas = rows;
         });
@@ -43,10 +43,24 @@ class Data {
             return this.matriculas;
         });
     }
-    idalumno(IDALUMNO) {
+    idAlumno(IDALUMNO) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.Consulta();
-            const rst = this.matriculas.filter((data) => data.id_alumno.includes(IDALUMNO));
+            const rst = this.matriculas.filter((data) => data.id_alumno === IDALUMNO);
+            return rst;
+        });
+    }
+    idInstructor(IDINSTRUCTOR) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.Consulta();
+            const rst = this.matriculas.filter((data) => data.id_inst === IDINSTRUCTOR);
+            return rst;
+        });
+    }
+    Nrc(nrc) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.Consulta();
+            const rst = this.matriculas.filter((data) => data.nrc === nrc);
             return rst;
         });
     }
@@ -59,14 +73,14 @@ class Data {
     }
     cantidadCursos() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = 'select distinct cursoid from sinfo.vmatapex';
+            const ssql = 'select distinct id_curso from sinfo.vmatsinfo';
             const { rows } = yield this.dbSinfo.query(ssql);
             return rows.length;
         });
     }
     cantidadAlumnos() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = 'select distinct id_alumno from sinfo.vmatapex';
+            const ssql = 'select distinct id_alumno from sinfo.vmatsinfo  ';
             const { rows } = yield this.dbSinfo.query(ssql);
             return rows.length;
         });

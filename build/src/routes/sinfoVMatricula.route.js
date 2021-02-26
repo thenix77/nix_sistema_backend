@@ -14,7 +14,9 @@ class Rutas {
     }
     get() {
         this.router.get("/", sinfoVMatricula_ctrl_1.default.index);
-        this.router.get("/idalumno/:idalumno", token_1.validationToken, sinfoVMatricula_ctrl_1.default.idalumno);
+        this.router.get("/idalumno/:idalumno", sinfoVMatricula_ctrl_1.default.idalumno);
+        this.router.get('/idinstructor/:idinstructor', sinfoVMatricula_ctrl_1.default.idInstructor);
+        this.router.get("/nrc/:nrc", sinfoVMatricula_ctrl_1.default.Nrc);
         this.router.get("/idcurso/:idcurso", token_1.validationToken, sinfoVMatricula_ctrl_1.default.idcurso);
         this.router.get('/cantidadCursos', sinfoVMatricula_ctrl_1.default.cantidadCursos);
         this.router.get('/cantidadAlumnos', sinfoVMatricula_ctrl_1.default.cantidadAlumnos);

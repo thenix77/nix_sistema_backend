@@ -49,12 +49,21 @@ class Data {
             return enrolamientos.filter(rs => rs.periodo === PERIODO);
         });
     }
+    EnrolamientoPeriodoAlumno(PERIODO, IDALUMNO) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.Enrolamiento();
+            const rst = this.enrolamiento
+                .filter((dato) => dato.periodo === PERIODO)
+                .filter((dato) => dato.batch_uid === IDALUMNO);
+            return rst;
+        });
+    }
     EnrolamientoPeriodoCurso(PERIODO, CURSOID) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.Enrolamiento();
             const rst = this.enrolamiento
                 .filter((dato) => dato.periodo === PERIODO)
-                .filter((dato) => dato.course_id === CURSOID);
+                .filter((dato) => dato.course_id.trim() === CURSOID.trim());
             return rst;
         });
     }
@@ -78,7 +87,17 @@ class Data {
             const rst = yield this.enrolamiento
                 .filter((dato) => dato.periodo === PERIODO)
                 .filter(dato => dato.role.toUpperCase() === ROL.toUpperCase())
-                .filter((curso) => curso.nrc === NRC);
+                .filter((curso) => curso.course_id.includes(NRC));
+            return rst;
+        });
+    }
+    enrolamientoPeriodoCursoAlumno(periodo, idcurso, idalumno) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.Enrolamiento();
+            const rst = yield this.enrolamiento
+                .filter((dato) => dato.periodo === periodo)
+                .filter((dato) => dato.course_id === idcurso)
+                .filter((curso) => curso.batch_uid === idalumno);
             return rst;
         });
     }

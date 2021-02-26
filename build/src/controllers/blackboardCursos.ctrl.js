@@ -24,7 +24,7 @@ class Ctrl {
         return __awaiter(this, void 0, void 0, function* () {
             const PERIODO = req.params.periodo;
             const cursos = yield blackboardCurso_data_1.default.CursosPeriodo(PERIODO);
-            return res.status(200).json({ length: cursos.length, cursos });
+            return res.status(200).json({ length: cursos.length, data: cursos });
         });
     }
     cursosPeriodoCurso(req, res) {
@@ -32,7 +32,7 @@ class Ctrl {
             const PERIODO = req.params.periodo;
             const CURSO = req.params.curso;
             const cursos = yield blackboardCurso_data_1.default.CursosPeriodoCurso(PERIODO, CURSO);
-            return res.status(200).json({ length: cursos.length, cursos });
+            return res.status(200).json({ length: cursos.length, data: cursos });
         });
     }
     cursosPeriodoNrc(req, res) {
