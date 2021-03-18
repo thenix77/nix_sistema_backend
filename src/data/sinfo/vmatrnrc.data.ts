@@ -8,7 +8,7 @@ class Data {
   private dbBlackBoard = dbBlackBoard();
 
   private async consulta():Promise<ISinfoMatrNrc[]>{
-    const ssql = 'select distinct * from sinfo.vcursos'
+    const ssql = 'select * from sinfo.vmatrnrc'
       const { rows}= await this.dbSinfo.query(ssql)
     return rows;
   }
@@ -21,12 +21,20 @@ class Data {
     return rst;
     }
     
-    async findxNrc(periodo:string,nrc: string):Promise<ISinfoMatrNrc[]> {
+  async findxNrc(periodo:string,nrc: string):Promise<ISinfoMatrNrc[]> {
     
         const ssql:ISinfoMatrNrc[] = await this.consulta()
         const rst:ISinfoMatrNrc[] = ssql
-              .filter((c:ISinfoMatrNrc)=> c.pk1 === periodo +'-'+nrc)
+              .filter((c:ISinfoMatrNrc)=> c.pk2 === periodo +'-'+nrc)
     return rst;
+  }
+
+  async findxIdAlumno(periodo:string,idAlumno: string):Promise<ISinfoMatrNrc[]> {
+    
+      const ssql:ISinfoMatrNrc[] = await this.consulta()
+      const rst:ISinfoMatrNrc[] = ssql
+            .filter((c:ISinfoMatrNrc)=> c.pk1 === periodo +'-'+idAlumno)
+  return rst;
   }
 
 }

@@ -3,8 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dbBlackBoard = exports.dbSinfo = void 0;
+exports.dbOracle = exports.dbBlackBoard = exports.dbSinfo = void 0;
 const pg_1 = require("pg");
+const oracledb_1 = __importDefault(require("oracledb"));
 const dotenv_1 = __importDefault(require("dotenv"));
 function dbSinfo() {
     dotenv_1.default.config();
@@ -45,3 +46,12 @@ function dbBlackBoard() {
     });*/
 }
 exports.dbBlackBoard = dbBlackBoard;
+function dbOracle() {
+    oracledb_1.default.outFormat = oracledb_1.default.OUT_FORMAT_OBJECT;
+    return oracledb_1.default.getConnection({
+        user: 'gcabana',
+        password: 'Guillermo',
+        connectString: '162.248.52.113/XEPDB1'
+    });
+}
+exports.dbOracle = dbOracle;

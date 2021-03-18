@@ -15,11 +15,19 @@ class Data {
         this.dbSinfo = conection_1.dbSinfo();
         this.dbBlackBoard = conection_1.dbBlackBoard();
         this.cursos = [];
-        this.term = [];
+        this.ssql = `select * 
+                         from bb.cursos_enrolados`;
+    }
+    generaIn(dato) {
+        let values = [];
+        let newDato = dato.split(',');
+        var setvs = (vs) => vs.map((v) => '$' + (values.push(v))).join();
+        return setvs(newDato);
     }
     CursosBB() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = `select * from bb.cursos_enrolados`;
+            const ssql = `select * 
+                  from bb.cursos_enrolados`;
             const { rows } = yield this.dbBlackBoard.query(ssql);
             this.cursos = rows;
             return this.cursos;
@@ -47,12 +55,16 @@ class Data {
             return rst;
         });
     }
-    CursosPeriodoNrc(PERIODO, NRC) {
+    CursosPeriodoNrc(periodo, nrcs) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.CursosBB();
-            const rst = this.cursos.filter(curso => curso.periodo === PERIODO)
-                .filter((curso) => curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC);
-            return rst;
+            const ssql = this.ssql +
+                " where  " +
+                "       periodo like '" + periodo + "' " +
+                "       and substring(course_id ,position('_' in course_id) +1 , length(course_id)) in (" + this.generaIn(nrcs) + ") " +
+                //  "        and usuariovisible like 'Y' "
+                " order by course_id";
+            const { rows } = yield this.dbSinfo.query(ssql, nrcs.split(','));
+            return rows;
         });
     }
 }

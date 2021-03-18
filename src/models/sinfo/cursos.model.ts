@@ -2,7 +2,7 @@ export interface ISinfoCursos{
     pk1:string
     nrc:string
     periodo:string
-    capacidad_nrc:string
+    capacidad_nrc:number
     curso:string
     id_curso:string
     patron:string

@@ -14,12 +14,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const bbsinfo_data_1 = __importDefault(require("../data/bbsinfo.data"));
 class Ctrl {
-    bbSinfoPeriodo(req, res) {
+    findxNrc(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const PERIODO = req.params.periodo;
             const NRCs = req.params.nrc;
-            let rst = yield bbsinfo_data_1.default.index(PERIODO, NRCs);
-            return res.status(200).json({ length: (rst) ? rst.length : 0, data: rst });
+            const rst = yield bbsinfo_data_1.default.findxNrc(PERIODO, NRCs);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
+    findxAlumno(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const PERIODO = req.params.periodo;
+            const IDALUMNO = req.params.idalumno;
+            const rst = yield bbsinfo_data_1.default.findxIdAlumno(PERIODO, IDALUMNO);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
+    findxRetiro(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const PERIODO = req.params.periodo;
+            const rst = yield bbsinfo_data_1.default.findxRetiro(PERIODO);
+            return res.status(200).json({ length: rst.length, data: rst });
         });
     }
 }

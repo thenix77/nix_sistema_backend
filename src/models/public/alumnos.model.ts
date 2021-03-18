@@ -1,0 +1,22 @@
+export interface IPublicAlumno{
+    periodo:string
+    nrc:string
+    id_curso:string
+    curso:string
+    patron:string
+    id_alumno:string
+    alumno:string
+    zonal:string
+    campus:string
+    azonal:string
+    acampus:string
+    fecha:string
+    retirado:string
+    deuda:string
+    matriculable:string
+    cursocreado:string
+    cursocerrado:string
+    usuarioenrolado:string
+    usuariovisiblecurso:string
+    usuariovisiblebb:string
+}

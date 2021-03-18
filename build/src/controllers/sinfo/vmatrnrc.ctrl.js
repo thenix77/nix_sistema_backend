@@ -29,6 +29,14 @@ class Ctrl {
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }
+    findxAlumno(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const periodo = req.params.periodo;
+            const idAlumno = req.params.idalumno;
+            const rst = yield vmatrnrc_data_1.default.findxNrc(periodo, idAlumno);
+            return res.status(200).json({ length: rst.length, data: rst });
+        });
+    }
 }
 const ctrl = new Ctrl();
 exports.default = ctrl;

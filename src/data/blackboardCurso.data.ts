@@ -6,10 +6,21 @@ class Data {
   private dbSinfo = dbSinfo();
   private dbBlackBoard = dbBlackBoard();
   private cursos: ICursos[] = [];
-  private term: ITerm[] = [];
+
+  private ssql:string =`select * 
+                         from bb.cursos_enrolados`
+
+  private generaIn(dato:string){
+    let values = []
+    let newDato = dato.split(',')
+    var setvs = (vs:string[]) => vs.map((v:string) => '$' + (values.push(v))).join();
+
+    return setvs(newDato)
+  }
 
   async CursosBB() {
-    const ssql =`select * from bb.cursos_enrolados`
+    const ssql =`select * 
+                  from bb.cursos_enrolados`
     
     const { rows } = await this.dbBlackBoard.query(ssql);
 
@@ -42,14 +53,19 @@ class Data {
     return rst;
   }
 
-  async CursosPeriodoNrc(PERIODO:string,NRC: string) {
-    await this.CursosBB();
-
-    const rst: ICursos[] = this.cursos.filter(curso => curso.periodo === PERIODO)
-      .filter((curso) =>
-        curso.course_id.substring(curso.course_id.indexOf('_') + 1, curso.course_id.length) === NRC )
+  async CursosPeriodoNrc(periodo:string,nrcs: string) {
     
-    return rst;
+    const ssql = this.ssql+
+                     " where  "+
+                     "       periodo like '"+ periodo+"' "+
+                     "       and substring(course_id ,position('_' in course_id) +1 , length(course_id)) in (" + this.generaIn(nrcs) + ") "+
+                   //  "        and usuariovisible like 'Y' "
+                     " order by course_id"
+
+   
+    const { rows}= await this.dbSinfo.query(ssql, nrcs.split(','))  
+
+    return rows
   }
 
 

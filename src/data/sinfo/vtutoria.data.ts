@@ -7,8 +7,8 @@ class Data {
   private dbBlackBoard = dbBlackBoard();
 
   private async consulta():Promise<ISinfoTutoria[]>{
-    const ssql = 'select distinct * '+ 
-                 '  from sinfo.vtutoria'
+    const ssql = 'select  * '+ 
+                 '  from sinfo.vtutorias'
       const { rows} = await this.dbSinfo.query(ssql) 
 
     return rows  ;

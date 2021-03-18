@@ -13,6 +13,7 @@ class Rutas {
   get() {
     this.router.get("/:periodo", ctrl.index);
     this.router.get("/:periodo/nrc/:nrc", ctrl.findxNrc);
+    this.router.get("/:periodo/alumno/:idalumno", ctrl.findxAlumno);
    
   }
 

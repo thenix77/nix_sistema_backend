@@ -29,13 +29,6 @@ class Ctrl {
             return res.status(200).json({ length: rst.length, data: rst });
         });
     }
-    findxCurso(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const idCurso = req.params.idCurso;
-            const rst = yield vhorarios_data_1.default.findxCurso(idCurso);
-            return res.status(200).json({ length: rst.length, data: rst });
-        });
-    }
 }
 const ctrl = new Ctrl();
 exports.default = ctrl;

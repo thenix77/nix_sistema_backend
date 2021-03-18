@@ -14,6 +14,7 @@ class Rutas {
     get() {
         this.router.get("/:periodo", vmatrnrc_ctrl_1.default.index);
         this.router.get("/:periodo/nrc/:nrc", vmatrnrc_ctrl_1.default.findxNrc);
+        this.router.get("/:periodo/alumno/:idalumno", vmatrnrc_ctrl_1.default.findxAlumno);
     }
     post() { }
 }

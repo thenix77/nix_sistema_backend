@@ -14,7 +14,6 @@ class Rutas {
     get() {
         this.router.get("/:periodo", vhorarios_ctrl_1.default.index);
         this.router.get("/:periodo/nrc/nrc", vhorarios_ctrl_1.default.findxNrc);
-        this.router.get('/curso/:idcurso', vhorarios_ctrl_1.default.findxCurso);
     }
     post() { }
 }

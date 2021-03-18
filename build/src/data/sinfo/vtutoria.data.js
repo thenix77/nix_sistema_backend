@@ -17,8 +17,8 @@ class Data {
     }
     consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = 'select distinct * ' +
-                '  from sinfo.vtutoria';
+            const ssql = 'select  * ' +
+                '  from sinfo.vtutorias';
             const { rows } = yield this.dbSinfo.query(ssql);
             return rows;
         });

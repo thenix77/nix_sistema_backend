@@ -19,14 +19,6 @@ class Ctrl {
         return res.status(200).json({length: rst.length, data: rst})
     }
 
-    async findxCurso(req: Request, res: Response): Promise<Response | void> {
-
-        const idCurso = req.params.idCurso
-
-        const rst = await data.findxCurso(idCurso)
-        return res.status(200).json({length: rst.length, data: rst})
-    }
-
 }
 
 const ctrl = new Ctrl();

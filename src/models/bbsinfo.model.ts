@@ -1,17 +1,19 @@
 export interface IBbSinfo{
+    periodo:string
+    id_alumno:string
+    alumno:string
+    azonal: string
+    acampus: string
     nrc:string
-    cursoid: string 
-    pago: string 
-    tipo: string 
-    calificable: string 
-    patron: string 
-    periodo: string 
-    id_alumno: string 
-    id_inst: string 
-    zonal: string 
-    instregistrado:    string
-    userregistrado: string
-    usuariovisiblecurso:string
-    supregistrado: string
-
+    id_curso:string
+    curso:string
+    czonal:string
+    ccampus:string
+    deuda:string
+    retirado:string
+    calificable:string
+    matriculable:string
+    usuarioenrolado:string
+    usuariovisible:string
+    script:string
 }

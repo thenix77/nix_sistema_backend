@@ -9,11 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const conection_1 = require("../database/conection");
 class Ctrl {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const ssql = 'grant SELECT any table ';
+            const oracle = yield conection_1.dbOracle();
+            const rs = yield oracle.execute(ssql);
             console.log('default');
-            return res.status(200).json({ status: 'onLine' });
+            return res.status(200).json({ status: 'onLine', rs });
         });
     }
 }

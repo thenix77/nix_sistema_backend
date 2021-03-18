@@ -14,24 +14,64 @@ class Data {
     constructor() {
         this.dbSinfo = conection_1.dbSinfo();
         this.dbBlackBoard = conection_1.dbBlackBoard();
+        this.ssql = `select   * , 
+                           scriptusuario(id_alumno , id_curso , deuda , retirado , calificable ,  matriculable , usuarioenrolado, usuariovisible) script 
+                           from matricula `;
     }
-    consulta(periodo, nrcs) {
+    generaIn(dato) {
+        let values = [];
+        let newDato = dato.split(',');
+        var setvs = (vs) => vs.map((v) => '$' + (values.push(v))).join();
+        return setvs(newDato);
+    }
+    consultaNrc(periodo, nrcs) {
         return __awaiter(this, void 0, void 0, function* () {
-            let values = [];
-            let newNrcs = nrcs.split(',');
-            var setvs = (vs) => vs.map((v) => '$' + (values.push(v))).join();
-            const ssql = "select * " +
-                "from vmatbbsinfo" +
+            const ssql = this.ssql +
                 " where " +
-                "       periodo like '" + periodo + "' and " +
-                "       nrc in (" + setvs(newNrcs) + ")";
-            const { rows } = yield this.dbSinfo.query(ssql, newNrcs);
+                "       periodo like '" + periodo + "' " +
+                "        and nrc in (" + this.generaIn(nrcs) + ") " +
+                //  "        and usuariovisible like 'Y' "
+                " order by nrc";
+            const { rows } = yield this.dbSinfo.query(ssql, nrcs.split(','));
             return rows;
         });
     }
-    index(PERIODO, NRCs) {
+    consultaAlumno(periodo, idAlumno) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.consulta(PERIODO, NRCs);
+            const ssql = this.ssql +
+                " where " +
+                "       periodo like '" + periodo + "' " +
+                "       and id_alumno in (" + this.generaIn(idAlumno) + ") " +
+                " order by nrc";
+            const { rows } = yield this.dbSinfo.query(ssql, idAlumno.split(','));
+            return rows;
+        });
+    }
+    consultaRetiro(periodo) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ssql = this.ssql +
+                "  where " +
+                "       periodo like $1 " +
+                "       	and retirado like 'Y' " +
+                "          and usuariovisible like 'Y' " +
+                "  order by id_alumno,nrc";
+            const { rows } = yield this.dbSinfo.query(ssql, [periodo]);
+            return rows;
+        });
+    }
+    findxNrc(PERIODO, NRC) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.consultaNrc(PERIODO, NRC);
+        });
+    }
+    findxIdAlumno(PERIODO, IDALUMNO) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.consultaAlumno(PERIODO, IDALUMNO);
+        });
+    }
+    findxRetiro(PERIODO) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.consultaRetiro(PERIODO);
         });
     }
 }

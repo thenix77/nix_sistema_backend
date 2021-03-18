@@ -13,9 +13,9 @@ class Rutas {
     }
     get() {
         this.router.get("/", blackboardCursos_ctrl_1.default.index);
-        this.router.get("/periodo/:periodo", blackboardCursos_ctrl_1.default.cursosPeriodo);
-        this.router.get("/periodo/:periodo/:curso", blackboardCursos_ctrl_1.default.cursosPeriodoCurso);
-        this.router.get("/periodo/:periodo/nrc/:nrc", blackboardCursos_ctrl_1.default.cursosPeriodoNrc);
+        this.router.get("/:periodo", blackboardCursos_ctrl_1.default.cursosPeriodo);
+        this.router.get("/:periodo/curso/:curso", blackboardCursos_ctrl_1.default.cursosPeriodoCurso);
+        this.router.get("/:periodo/nrc/:nrc", blackboardCursos_ctrl_1.default.cursosPeriodoNrc);
     }
     post() { }
 }

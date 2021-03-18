@@ -36,13 +36,6 @@ class Data {
             return rst;
         });
     }
-    findxCurso(idCurso) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const ssql = yield this.consulta();
-            const rst = ssql.filter((h) => h.id_curso === idCurso);
-            return rst;
-        });
-    }
 }
 const data = new Data();
 exports.default = data;

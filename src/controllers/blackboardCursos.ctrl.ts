@@ -27,6 +27,7 @@ class Ctrl {
     const PERIODO = req.params.periodo;
     const NRC = req.params.nrc;
     
+    
     const cursos = await data.CursosPeriodoNrc(PERIODO,NRC);
     return res.status(200).json({ length: cursos.length, cursos });
   }

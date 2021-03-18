@@ -12,7 +12,9 @@ class Rutas {
         this.post();
     }
     get() {
-        this.router.get("/:periodo/:nrc", bbsinfo_ctrl_1.default.bbSinfoPeriodo);
+        this.router.get("/:periodo/nrc/:nrc", bbsinfo_ctrl_1.default.findxNrc);
+        this.router.get('/:periodo/alumno/:idalumno', bbsinfo_ctrl_1.default.findxAlumno);
+        this.router.get('/:periodo/retiro', bbsinfo_ctrl_1.default.findxRetiro);
     }
     post() { }
 }

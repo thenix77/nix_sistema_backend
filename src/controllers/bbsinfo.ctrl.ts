@@ -1,15 +1,31 @@
 import { Request, Response } from "express"
 import data from '../data/bbsinfo.data'
-import { IBbSinfo } from "../models/bbsinfo.model"
 
 class Ctrl {
-    async bbSinfoPeriodo(req: Request, res: Response): Promise<Response | void> {
+    async findxNrc(req: Request, res: Response): Promise<Response | void> {
         const PERIODO = req.params.periodo
         const NRCs = req.params.nrc
 
-        let rst:IBbSinfo[]|void = await data.index(PERIODO,NRCs)
+        const rst = await data.findxNrc(PERIODO,NRCs)
 
-        return res.status(200).json({length:(rst)? rst.length : 0, data: rst})
+        return res.status(200).json({length:rst.length , data: rst})
+    }
+
+    async findxAlumno(req: Request, res: Response): Promise<Response | void> {
+        const PERIODO = req.params.periodo
+        const IDALUMNO = req.params.idalumno
+
+        const rst = await data.findxIdAlumno(PERIODO,IDALUMNO)
+
+        return res.status(200).json({length:rst.length , data: rst})
+    }
+
+    async findxRetiro(req: Request, res: Response): Promise<Response | void> {
+        const PERIODO = req.params.periodo
+        
+        const rst = await data.findxRetiro(PERIODO)
+
+        return res.status(200).json({length:rst.length , data: rst})
     }
 
 }

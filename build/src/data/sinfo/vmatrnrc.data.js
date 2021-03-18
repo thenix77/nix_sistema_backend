@@ -17,7 +17,7 @@ class Data {
     }
     consulta() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ssql = 'select distinct * from sinfo.vcursos';
+            const ssql = 'select * from sinfo.vmatrnrc';
             const { rows } = yield this.dbSinfo.query(ssql);
             return rows;
         });
@@ -33,7 +33,15 @@ class Data {
         return __awaiter(this, void 0, void 0, function* () {
             const ssql = yield this.consulta();
             const rst = ssql
-                .filter((c) => c.pk1 === periodo + '-' + nrc);
+                .filter((c) => c.pk2 === periodo + '-' + nrc);
+            return rst;
+        });
+    }
+    findxIdAlumno(periodo, idAlumno) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ssql = yield this.consulta();
+            const rst = ssql
+                .filter((c) => c.pk1 === periodo + '-' + idAlumno);
             return rst;
         });
     }

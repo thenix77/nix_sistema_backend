@@ -12,9 +12,9 @@ class Rutas {
 
   get() {
     this.router.get("/", ctrl.index);
-    this.router.get("/periodo/:periodo", ctrl.cursosPeriodo);
-    this.router.get("/periodo/:periodo/:curso", ctrl.cursosPeriodoCurso);
-    this.router.get("/periodo/:periodo/nrc/:nrc", ctrl.cursosPeriodoNrc);
+    this.router.get("/:periodo", ctrl.cursosPeriodo);
+    this.router.get("/:periodo/curso/:curso", ctrl.cursosPeriodoCurso);
+    this.router.get("/:periodo/nrc/:nrc", ctrl.cursosPeriodoNrc);
   
   }
 

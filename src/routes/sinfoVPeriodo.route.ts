@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ctrl from "../controllers/sinfoPeriodo.ctrl";
+import ctrl from "../controllers/sinfo/vperiodo.ctrl";
 
 class Rutas {
   router: Router;

@@ -26,16 +26,21 @@ const blackboardEnrolamiento_route_1 = __importDefault(require("./routes/blackbo
 const blackboardCursos_route_1 = __importDefault(require("./routes/blackboardCursos.route"));
 const blackboardTerm_route_1 = __importDefault(require("./routes/blackboardTerm.route"));
 const blackboardRetiros_route_1 = __importDefault(require("./routes/blackboardRetiros.route"));
+/** */
 const sinfoSupervisores_route_1 = __importDefault(require("./routes/sinfoSupervisores.route"));
+const bbsinfo_route_1 = __importDefault(require("./routes/bbsinfo.route"));
 /** */
 const sinfovcurso_route_1 = __importDefault(require("./routes/sinfovcurso.route"));
-const sinfoVEnrolamiento_route_1 = __importDefault(require("./routes/sinfoVEnrolamiento.route"));
 const sinfoVhorarios_route_1 = __importDefault(require("./routes/sinfoVhorarios.route"));
-const sinfoVInstEnrolamiento_route_1 = __importDefault(require("./routes/sinfoVInstEnrolamiento.route"));
 const sinfoVMatNrc_route_1 = __importDefault(require("./routes/sinfoVMatNrc.route"));
 const sinfoVInstructor_route_1 = __importDefault(require("./routes/sinfoVInstructor.route"));
 const sinfoVPeriodo_route_1 = __importDefault(require("./routes/sinfoVPeriodo.route"));
-const sinfovtutoria_route_1 = __importDefault(require("./routes/sinfovtutoria.route"));
+const sinfoVTutoria_route_1 = __importDefault(require("./routes/sinfoVTutoria.route"));
+/** */
+const publicCursos_route_1 = __importDefault(require("./routes/publicCursos.route"));
+const publicEnrolamientos_route_1 = __importDefault(require("./routes/publicEnrolamientos.route"));
+const publicInstructores_route_1 = __importDefault(require("./routes/publicInstructores.route"));
+const publicAlumnos_route_1 = __importDefault(require("./routes/publicAlumnos.route"));
 class Server {
     constructor(port) {
         this.port = port;
@@ -66,16 +71,23 @@ class Server {
         this.app.use("/BB/Cursos", blackboardCursos_route_1.default);
         this.app.use("/BB/Term", blackboardTerm_route_1.default);
         this.app.use("/BB/Retiros", blackboardRetiros_route_1.default);
+        /** */
+        this.app.use("/public/cursos", publicCursos_route_1.default);
+        this.app.use("/public/enrolamientos", publicEnrolamientos_route_1.default);
+        this.app.use("/public/alumnos", publicAlumnos_route_1.default);
+        this.app.use("/public/instructores", publicInstructores_route_1.default);
+        /** */
         this.app.use('/sinfo/supervisores', sinfoSupervisores_route_1.default);
+        this.app.use('/bbsinfo/matricula', bbsinfo_route_1.default);
         /** */
         this.app.use('/sinfo/vista/cursos', sinfovcurso_route_1.default);
-        this.app.use('/sinfo/vista/enrolamiento', sinfoVEnrolamiento_route_1.default);
         this.app.use('/sinfo/vista/horarios', sinfoVhorarios_route_1.default);
-        this.app.use('/sinfo/vista/instenrolamiento', sinfoVInstEnrolamiento_route_1.default);
-        this.app.use("/sinfo/vista/instructores", sinfoVInstructor_route_1.default);
+        this.app.use('/sinfo/vista/tutorias', sinfoVTutoria_route_1.default);
         this.app.use("/sinfo/vista/matrnrc", sinfoVMatNrc_route_1.default);
+        this.app.use("/sinfo/vista/instructores", sinfoVInstructor_route_1.default);
         this.app.use('/sinfo/vista/periodos', sinfoVPeriodo_route_1.default);
-        this.app.use('/sinfo/vista/tutoria', sinfovtutoria_route_1.default);
+        //  this.app.use('/sinfo/vista/enrolamiento', sinfoVEnrolamientoRoute)
+        //this.app.use('/sinfo/vista/instenrolamiento', sinfoVInstEnrolamientoRoute)
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {

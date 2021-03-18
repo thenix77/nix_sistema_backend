@@ -12,7 +12,9 @@ class Rutas {
 
   get() {
   
-    this.router.get("/:periodo/:nrc", ctrl.bbSinfoPeriodo);
+    this.router.get("/:periodo/nrc/:nrc", ctrl.findxNrc);
+    this.router.get('/:periodo/alumno/:idalumno' , ctrl.findxAlumno)
+    this.router.get('/:periodo/retiro' , ctrl.findxRetiro)
   }
 
   post() {}

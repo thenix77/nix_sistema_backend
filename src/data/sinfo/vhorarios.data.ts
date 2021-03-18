@@ -27,13 +27,6 @@ class Data {
 
     return rst
   }
- 
-  async findxCurso(idCurso:string):Promise<ISinfoHorarios[]>{
-    const ssql:ISinfoHorarios[] = await this.consulta()
-    const rst:ISinfoHorarios[] = ssql.filter((h:ISinfoHorarios) => h.id_curso === idCurso )
-
-    return rst
-  }
 
 }
 

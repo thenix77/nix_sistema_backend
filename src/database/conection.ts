@@ -1,5 +1,7 @@
 import { Pool } from "pg";
+import oracledb from 'oracledb'
 import dotenv from 'dotenv'
+import OracleDB from "oracledb";
 
 export function dbSinfo() {
   dotenv.config()
@@ -28,6 +30,8 @@ export function dbBlackBoard() {
     idleTimeoutMillis: 10000,
   }); 
   
+
+
   /*
   return new Pool({
     host: "senati-dda.blackboard.com",
@@ -40,4 +44,13 @@ export function dbBlackBoard() {
     idleTimeoutMillis: 10000,
     
   });*/
+}
+
+export  function dbOracle(){
+  oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
+  return oracledb.getConnection({
+    user  :'gcabana',
+    password:'Guillermo',
+    connectString:'162.248.52.113/XEPDB1'
+  })
 }
